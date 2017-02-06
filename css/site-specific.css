@@ -1,0 +1,93 @@
+/****** General ******/
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+	background-color: #202323;
+	color: #ffffff;
+	font-family: 'Roboto', helvetica, sans-serif;
+}
+@media (min-width: 768px) {
+	.container {
+		max-width: 1024px;
+	}
+}
+
+/******* Navbar ******/
+.navbar-default {
+	background-color: #202323;
+	border-color: #757F7F;
+}
+.navbar-default .navbar-brand {
+	color: #ffffff;
+	font-weight: 100;
+	font-size: 1.25em;
+}
+.navbar-default .navbar-nav > li > a {
+	color: #ffffff;
+	font-weight: 100;
+	font-size: .9em;
+}
+.nav > li > a {
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 16px;
+	padding-bottom: 14px;
+}
+.navbar-default .navbar-brand:hover {
+	color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+/******* Jumbotron ******/
+.jumbotron {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	background-color: #202323;
+}
+.container .jumbotron {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.jumbotron h1 {
+	font-weight: 300;
+	font-size: 3.45em;
+	line-height: 120%;
+}
+.jumbotron .container {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+/****** Text *********/
+.section {
+	padding-bottom: 20px;
+}
+.row {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+.section p {
+	font-weight: 100;
+}
+.section p > a {
+	color: #ffffff;
+	text-decoration: underline;
+}
+h2 {
+	font-size: 2em;
+	font-weight: 300;
+	padding-bottom: 5px;
+}
+
+/****** Footer ******/
+.footer p {
+	font-size: 1em;
+	font-weight: 100;
+}
+.footer p > a {
+	color: #ffffff;
+	text-decoration: underline;
+}
