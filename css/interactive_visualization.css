@@ -65,7 +65,7 @@ a {
 	left: -8px;
 	width: 5px;
 	height: 5px;
-	background-color: #000000;
+	background-color: #202323;
 }
 #legendRect02{
 	position: absolute;
@@ -73,7 +73,7 @@ a {
 	left: 72px;
 	width: 5px;
 	height: 5px;
-	background-color: #000000;
+	background-color: #202323;
 }
 #legendRect03{
 	position: absolute;
@@ -81,7 +81,7 @@ a {
 	left: 152px;
 	width: 5px;
 	height: 5px;
-	background-color: #000000;
+	background-color: #202323;
 }
 #legendRect04{
 	position: absolute;
@@ -89,7 +89,7 @@ a {
 	left: 232px;
 	width: 5px;
 	height: 5px;
-	background-color: #000000;
+	background-color: #202323;
 }
 
 /******* CSS Styling of Buttons to sort and color data ********/
@@ -190,7 +190,7 @@ a {
 	width: 200px;
 	height: auto;
 	padding: 5px;
-	background-color: #000000;
+	background-color: #202323;
 	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
