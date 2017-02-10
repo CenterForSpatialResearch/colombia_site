@@ -1,5 +1,5 @@
 /******** General ********/
-body {
+/*body {
 	color: #ffffff;
 	background-color: #202323;
 	margin: 0px;
@@ -14,7 +14,7 @@ p {
 }
 a {
 	color:#0078ff;
-}
+}*/
 
 /****** Header and Legend CSS Info *********/
 #victimTitle{
@@ -181,7 +181,7 @@ a {
 	text-align: center;
 	-moz-transform: rotate(60.0deg);  /* FF3.5+ */
 	-o-transform: rotate(60.0deg);  /* Opera 10.5 */
-	-webkit-transform: rotate(60.0deg);  /* Saf3.1+, Chrome */ 
+	-webkit-transform: rotate(60.0deg);  /* Saf3.1+, Chrome */
 }
 
 /* Styling of our tooltip that pops out and displays relevant info on selected pixel */
