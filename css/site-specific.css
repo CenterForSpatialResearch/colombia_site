@@ -7,39 +7,8 @@ body {
 }
 .container-narrow {
 	max-width: 800px;
-}
-
-/******* Navbar ******/
-.navbar-default {
-	background-color: #191919;
-	border-color: #757F7F;
-}
-.navbar-default .navbar-brand {
-	color: #ffffff;
-	font-weight: 300;
-	font-size: 1.4em;
-}
-.navbar-default .navbar-nav > li > a {
-	color: #ffffff;
-	font-weight: 100;
-	font-size: .95em;
-}
-.nav > li > a {
-	padding-left: 8px;
-	padding-right: 8px;
-	padding-top: 16px;
-	padding-bottom: 14px;
-}
-.navbar-default .navbar-brand:hover {
-	color: #ffffff;
-}
-.navbar-default .navbar-nav > li > a:hover {
-	color: #ffffff;
-	text-decoration: underline;
-}
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active> a:focus, .navbar-default .navbar-nav > .active > a:hover {
-	color: #ffffff;
-	background-color: #333333;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /****** Jumbotron ********/
@@ -56,7 +25,6 @@ body {
 	text-align: center;
 }
 .jumbotron p {
-	/*text-align: center;*/
 	font-size: 1.5em;
 	font-weight: 100;
 }
@@ -64,7 +32,7 @@ body {
 /****** Thumbnails Landing Page *********/
 .tumbnails {
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 p.application-title {
 	font-weight: 100;
@@ -85,7 +53,6 @@ p.application-summary {
 
 /***** Text landing page ********/
 p.intro-bottom {
-	/*text-align: center;*/
 	font-weight: 100;
 	font-size: 1.15em;
 }
@@ -96,9 +63,7 @@ p.intro-bottom > a {
 
 /******* Other pages *********/
 .section {
-	background-color: #000000;
 	padding-top: 50px;
-	max-width: 99%;
 }
 .section h1 {
 	font-weight: 300;
@@ -117,9 +82,6 @@ h2 {
 	font-size: 2.5em;
 	font-weight: 300;
 	padding-bottom: 5px;
-}
-.featured-content {
-	padding-top: 15px;
 }
 
 /******** Social links ********/

@@ -38,7 +38,10 @@ body {
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active> a:focus, .navbar-default .navbar-nav > .active > a:hover {
 	color: #ffffff;
-	background-color: #333333;
+	/*font-weight: 300;*/
+	background-color: #191919;
+	text-decoration: underline;
+	/*background-color: #333333;*/
 }
 
 /******* Other pages *********/
