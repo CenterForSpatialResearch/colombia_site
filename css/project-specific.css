@@ -1,0 +1,73 @@
+/****** General ******/
+body {
+	background-color: #000000;
+	color: #ffffff;
+	font-family: 'Roboto', helvetica, sans-serif;
+}
+.container-narrow {
+	max-width: 800px;
+}
+
+/******* Navbar ******/
+.navbar-default {
+	background-color: #191919;
+	border-color: #757F7F;
+}
+.navbar-default .navbar-brand {
+	color: #ffffff;
+	font-weight: 300;
+	font-size: 1.4em;
+}
+.navbar-default .navbar-nav > li > a {
+	color: #ffffff;
+	font-weight: 100;
+	font-size: .95em;
+}
+.nav > li > a {
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 16px;
+	padding-bottom: 14px;
+}
+.navbar-default .navbar-brand:hover {
+	color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover {
+	color: #ffffff;
+	text-decoration: underline;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active> a:focus, .navbar-default .navbar-nav > .active > a:hover {
+	color: #ffffff;
+	/*font-weight: 300;*/
+	background-color: #191919;
+	text-decoration: underline;
+	/*background-color: #333333;*/
+}
+
+/******* Other pages *********/
+.section {
+	padding-top: 50px;
+	max-width: 96%;
+	margin: auto;
+}
+.section h1 {
+	font-weight: 300;
+	font-size: 3.45em;
+	line-height: 120%;
+}
+.section p {
+	font-weight: 100;
+	font-size: 1.35em;
+}
+.section p > a {
+	color: #ffffff;
+	text-decoration: underline;
+}
+h2 {
+	font-size: 2.5em;
+	font-weight: 300;
+	padding-bottom: 5px;
+}
+.featured-content {
+	padding-top: 15px;
+}
