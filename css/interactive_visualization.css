@@ -19,12 +19,12 @@ a {
 /****** Header and Legend CSS Info *********/
 #victimTitle{
 	position: absolute;
-	top: 0px; width:100%;
+	top: 50px; width:100%;
 	padding: 5px;
 	text-align: left;
 }
 #titleText{
-	font-size:13px;
+	font-size:.9em;
 	text-align: left;
 }
 #buttonText{
@@ -32,30 +32,32 @@ a {
 }
 #legends{
 	position: absolute;
+	top:50px;
 	right:300px;
 	padding:5px;
+	font-size: .7em;
 }
 #legend01{
 	position: absolute;
-	top:0px;
+	top:6px;
 	left: 0px;
 	width:70px;
 }
 #legend02{
 	position: absolute;
-	top:0px;
+	top:6px;
 	left: 80px;
 	width:70px;
 }
 #legend03{
 	position: absolute;
-	top:0px;
+	top:6px;
 	left: 160px;
 	width:70px;
 }
 #legend04{
 	position: absolute;
-	top:0px;
+	top:6px;
 	left: 240px;
 	width:70px;
 }
@@ -98,36 +100,44 @@ a {
 .button{
 	background-color: #2f4f4f;
 	position: absolute;
-	width: 27px;
-	height: 27px;
+	width: 60px;
+	height: 20px;
 	z-index: 100;
+	font-size: 0.7em;
+	top:105px;
+	text-align: center;
+	/*display: -webkit-flex;*/
+	/*display: flex;*/
+	/*align-items: center;*/
 }
 .sort{
 	left: 1px;
 }
 #sortTitle{
-	top: 30px;
+	width:450px;
+	top:85px;
+	left: 183px;
 }
 #sortKey{
-	top: 60px;
+	left: 183px;
 }
 #sortHecho{
-	top: 90px;
+	left: 248px;
 }
 #sortActor{
-	top: 120px;
+	left: 313px;
 }
 #sortGender{
-	top: 150px;
+	left: 378px;
 }
 #sortRace{
-	top: 180px;
+	left: 443px;
 }
 #sortEventDate{
-	top: 210px;
+	left: 508px;
 }
 #sortReportDate{
-	top: 240px;
+	left: 573px;
 }
 
 /*Buttons to color the data */
@@ -135,34 +145,37 @@ a {
 	right: 1px;
 }
 #colorTitle{
-	top: 30px;
+	width:450px;
+	top: 85px;
+	left: 965px;
 }
 #colorKey{
-	top: 60px;
+	left: 965px;
 }
 #colorHecho{
-	top: 90px;
+	left: 1030px;
 }
 #colorActor{
-	top: 120px;
+	left: 1095px;
 }
 #colorGender{
-	top: 150px;
+	left: 1160px;
 }
 #colorRace{
-	top: 180px;
+	left: 1225px;
 }
 #colorEventDate{
-	top: 210px;
+	left: 1290px;
 }
 #colorReportDate{
-	top: 240px;
+	left: 1355px;
 }
 
 /* Styling our timeline */
 .timeline {
 	position: absolute;
-	bottom: 2px;
+	/*bottom: 28px;*/
+	top: 800px;
 }
 .timeline.hidden {
 	display: none;
@@ -171,13 +184,15 @@ a {
 	background-color: #ffffff;
 	position: absolute;
 	width: 1px;
-	height: 5px;
-	bottom:25px;
+	height: 8px;
+	/*bottom:60px;*/
+	top: 785px;
 }
 .timelineTick.hidden{
 	display: none;
 }
 #timelineText {
+	font-size:0.7em;
 	text-align: center;
 	-moz-transform: rotate(60.0deg);  /* FF3.5+ */
 	-o-transform: rotate(60.0deg);  /* Opera 10.5 */

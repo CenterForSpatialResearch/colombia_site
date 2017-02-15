@@ -1,0 +1,23 @@
+sources:
+    osm: 
+        type: TopoJSON
+        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-JUsa0Gc
+        min_zoom: 6
+        max_zoom: 16
+
+layers:
+    places:
+        data: { source: osm}
+        filter:
+            all:
+                - kind: [city]
+        draw:
+            text:
+                anchor: bottom
+                offset: [0,10px]
+                interactive: true
+                font:
+                    family: Arial
+                    fill: '#fff'
+                    size: 16px
+                    stroke: { color: 'fff', width: 0.5px}

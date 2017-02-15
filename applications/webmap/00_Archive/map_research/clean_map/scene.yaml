@@ -1,0 +1,74 @@
+cameras:
+    camera1:
+        type: perspective
+
+lights:
+    light1:
+        type: directional
+        direction: [0, 1, -.5]
+        diffuse: .3
+        ambient: 1
+
+sources:
+    osm:
+        type: TopoJSON
+        url:  https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
+        max_zoom: 16
+
+layers:
+    earth:
+        data: { source: osm }
+        draw:
+            polygons:
+                order: function() { return feature.sort_key; }
+                color: '#ddeeee'
+    water:
+        data: { source: osm }
+        draw:
+            polygons:
+                order: function() { return feature.sort_key; }
+                color: '#88bbee'
+
+    roads:
+        data: { source: osm }
+        filter:
+            not: { kind: ["path", "rail"] }
+        draw:
+            lines:
+                order: function() { return feature.sort_key; }
+                color: gray
+                width: 8
+                cap: round
+        highway:
+            filter:
+                kind: highway
+            draw:
+                lines:
+                    order: function() { return feature.sort_key; }
+                    color: '#cc6666'
+                    width: 12
+                    outline:
+                        color: grey
+                        width: 1.5
+        minor_road:
+            filter:
+                kind: minor_road
+            draw:
+                lines:
+                    order: function() { return feature.sort_key; }
+                    color: lightgrey
+                    width: 5
+    places:
+        data: {source: osm}
+        filter:
+            kind: [city]
+        draw:
+            text:
+                order: function() {return feature.sort_key;}
+                font:
+                    fill: white
+                    size: 16px
+                    stroke: {color: '#444', width 4px}
+
+
+    

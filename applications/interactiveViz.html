@@ -60,7 +60,7 @@
 
 	<!-- Title Text and Header -->
 	<div id="victimTitle">
-		<p><span id="titleText">Victims</span> A random sample of 200,000 victims of the conflict</p>
+		<p><span id="titleText">Victims </span> <span style="font-size: .75em;"> A random sample of 200,000 victims of the conflict</span></p>
 	</div>
 	<div id="legends">
 		<div id="legend01">
@@ -82,8 +82,8 @@
 	</div>
 
 	<!-- Divs to sort and color data. D3 listens to these divs and updates GL once they are clicked -->
-	<div class="button sort" style="background-color: #202323" id="sortTitle">
-		<p id="buttonText">Order</p>
+	<div class="button sort" style="background-color: #000000; display: flex;" id="sortTitle">
+		<p id="buttonText">Order by</p>
 	</div>
 	<div class="button sort" id="sortKey">
 		<p id="buttonText">Key</p>
@@ -108,8 +108,8 @@
 	</div>
 
 	<!-- Divs to color -->
-	<div class="button color" style="background-color: #202323" id="colorTitle">
-		<p id="buttonText">Color</p>
+	<div class="button color" style="background-color: #000000; display: flex;" id="colorTitle">
+		<p id="buttonText">Symbolize by</p>
 	</div>
 	<div class="button color" id="colorKey">
 		<p id="buttonText">Key</p>
@@ -155,11 +155,11 @@
 	var windowHalfX = window.innerWidth / 2;
 	var windowHalfY = window.innerHeight / 2;
 	// Setup view settings
-	viewSize = 900;
+	viewSize = 850;
 	aspectRatio = window.innerWidth / window.innerHeight;	//SQUASH BUG HERE!!!
 	myHeight = viewSize;
 	myWidth = parseInt(viewSize*aspectRatio);
-	var dataPadding = 60;
+	var dataPadding = 200;
 	// For best viewing on my display, 1:3 ratio
 	var rectSize = 1; //1
 	var rectSpacerW = rectSpacerH = 1; //3
@@ -178,6 +178,9 @@
 	if(viewSize == 800) {
 		var hardCodeTimelineMin = 78;
 		var hardCodeTimelineMax = 942;
+	} else if (viewSize == 850){
+		var hardCodeTimelineMin = 183;
+		var hardCodeTimelineMax = 1413;
 	} else{
 		var hardCodeTimelineMin = 35;
 		var hardCodeTimelineMax = 985;
@@ -515,12 +518,14 @@
 		} else {
 			horizPadding = 0;
 			vertPadding = 0;
-			horizAdjust4center = 35;
+			horizAdjust4center = 185;
+			vertAdjust4center = 30;
 		};
 		// Create a Three JS camera and position it to look at our viz
+		// camera = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2 -horizPadding, aspectRatio * viewSize / 2 +horizPadding, viewSize/2+vertPadding, viewSize/ -2-vertPadding, -100, 100);
 		camera = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2 -horizPadding, aspectRatio * viewSize / 2 +horizPadding, viewSize/2+vertPadding, viewSize/ -2-vertPadding, -100, 100);
 		camera.position.x = myWidth/2-horizAdjust4center;
-		camera.position.y = myHeight/2-dataPadding/2;
+		camera.position.y = myHeight/2-dataPadding/2+vertAdjust4center;
 		camera.position.z = 1;
 		// Initialize the scene that will hold our geometry
 		scene = new THREE.Scene();
@@ -568,6 +573,7 @@
 		container.appendChild( renderer.domElement );
 		// Displays our framerate in the ULH corner
 		// Event listeners that listen for when the mouse is moved or when the window is resized
+		window.addEventListener( 'resize', onWindowResize, false);
 		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		// For user friendliness, we identify how we are sorting and coloring to begin by showing the appropriate legend and color
 		updateUiSortEventDate();
@@ -578,22 +584,22 @@
 	// ######################## THREE JS DOCUMENT EVENTS ###########################
 	// #############################################################################
 
-	// function onWindowResize() {
-	// 	//Variables to update whenever the browser window is resized
-	// 	// console.log("Window resized");
-	// 	windowHalfX = window.innerWidth / 2;
-	// 	windowHalfY = window.innerHeight / 2;
-	// 	camera.aspect = window.innerWidth / window.innerHeight;
-	// 	aspectRatio = window.innerWidth / window.innerHeight;
+	function onWindowResize( event ) {
+		//Variables to update whenever the browser window is resized
+		console.log("Window resized");
+		windowHalfX = window.innerWidth / 2;
+		windowHalfY = window.innerHeight / 2;
+		camera.aspect = window.innerWidth / window.innerHeight;
+		aspectRatio = window.innerWidth / window.innerHeight;
 	// 	camera.left   = - camViewSize * aspectRatio / 2;
 	// 	camera.right  =   camViewSize * aspectRatio / 2;
 	// 	camera.top    =   camViewSize / 2 + vertPadding;
 	// 	camera.bottom = - camViewSize / 2 + vertPadding;
-	// 	camera.updateProjectionMatrix();
-	// 	// myHeight = viewSize;
-	// 	// myWidth = viewSize*aspectRatio;
-	// 	renderer.setSize( window.innerWidth, window.innerHeight );
-	// }
+		camera.updateProjectionMatrix();
+		// myHeight = viewSize;
+		myWidth = viewSize*aspectRatio;
+		// renderer.setSize( window.innerWidth, window.innerHeight );
+	}
 	function onDocumentMouseMove( event ) {
 		//Update our mouse x and y position whenever the mouse moves
 		event.preventDefault();
