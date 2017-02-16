@@ -16,6 +16,14 @@ a {
 	color:#0078ff;
 }*/
 
+/*canvas {
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}*/
+
 /****** Header and Legend CSS Info *********/
 #victimTitle{
 	position: absolute;
@@ -32,8 +40,8 @@ a {
 }
 #legends{
 	position: absolute;
-	top:50px;
-	right:300px;
+	top:80px;
+	left:430px;
 	padding:5px;
 	font-size: .7em;
 }
@@ -61,13 +69,21 @@ a {
 	left: 240px;
 	width:70px;
 }
+
+#legend05{
+	position: absolute;
+	top:6px;
+	left: 320px;
+	width:70px;
+}
+
 #legendRect01{
 	position: absolute;
 	top: 10px;
 	left: -8px;
 	width: 5px;
 	height: 5px;
-	background-color: #202323;
+	background-color: #000000;
 }
 #legendRect02{
 	position: absolute;
@@ -75,7 +91,7 @@ a {
 	left: 72px;
 	width: 5px;
 	height: 5px;
-	background-color: #202323;
+	background-color: #000000;
 }
 #legendRect03{
 	position: absolute;
@@ -83,7 +99,7 @@ a {
 	left: 152px;
 	width: 5px;
 	height: 5px;
-	background-color: #202323;
+	background-color: #000000;
 }
 #legendRect04{
 	position: absolute;
@@ -91,7 +107,31 @@ a {
 	left: 232px;
 	width: 5px;
 	height: 5px;
-	background-color: #202323;
+	background-color: #000000;
+}
+#legendRect05{
+	position: absolute;
+	top: 10px;
+	left: 312px;
+	width: 5px;
+	height: 5px;
+	background-color: #000000;
+}
+#legendGradient{
+	position:absolute;
+	top:10px;
+	left:27px;
+	width: 128px;
+	height:5px;
+	background-color:#ffffff;
+	background: -webkit-linear-gradient(left, rgb(100,0,100) , rgb(100,255,100)); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(right, rgb(100,0,100) , rgb(100,255,100)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, rgb(100,0,100) , rgb(100,255,100)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, rgb(100,0,100) , rgb(100,255,100)); /* Standard syntax */
+}
+
+#legendGradient.hidden{
+	display: none;
 }
 
 /******* CSS Styling of Buttons to sort and color data ********/
@@ -101,81 +141,81 @@ a {
 	background-color: #2f4f4f;
 	position: absolute;
 	width: 60px;
-	height: 20px;
+	height: 15px;
 	z-index: 100;
 	font-size: 0.7em;
-	top:105px;
+	top:85px;
 	text-align: center;
 	/*display: -webkit-flex;*/
 	/*display: flex;*/
 	/*align-items: center;*/
 }
-.sort{
+.color{
 	left: 1px;
 }
-#sortTitle{
-	width:450px;
-	top:85px;
+#colorTitle{
+	/*width:450px;*/
+	/*top:85px;*/
+	left: 5px;
+}
+#colorKey{
 	left: 183px;
 }
-#sortKey{
-	left: 183px;
+#colorHecho{
+	left: 70px;
 }
-#sortHecho{
-	left: 248px;
+#colorActor{
+	left: 135px;
 }
-#sortActor{
-	left: 313px;
+#colorGender{
+	left: 200px;
 }
-#sortGender{
-	left: 378px;
+#colorRace{
+	left: 265px;
 }
-#sortRace{
-	left: 443px;
+#colorEventDate{
+	left: 330px;
 }
-#sortEventDate{
-	left: 508px;
-}
-#sortReportDate{
-	left: 573px;
+#colorReportDate{
+	left: 395px;
 }
 
 /*Buttons to color the data */
-.color{
+.sort{
 	right: 1px;
 }
-#colorTitle{
-	width:450px;
-	top: 85px;
+#sortTitle{
+	/*width:450px;*/
+	/*top: 85px;*/
+	left: 990px;
+}
+#sortKey{
 	left: 965px;
 }
-#colorKey{
-	left: 965px;
+#sortHecho{
+	left: 1040px;
 }
-#colorHecho{
-	left: 1030px;
+#sortActor{
+	left: 1105px;
 }
-#colorActor{
-	left: 1095px;
+#sortGender{
+	left: 1170px;
 }
-#colorGender{
-	left: 1160px;
+#sortRace{
+	left: 1235px;
 }
-#colorRace{
-	left: 1225px;
+#sortEventDate{
+	left: 1300px;
 }
-#colorEventDate{
-	left: 1290px;
-}
-#colorReportDate{
-	left: 1355px;
+#sortReportDate{
+	left: 1365px;
 }
 
 /* Styling our timeline */
 .timeline {
 	position: absolute;
 	/*bottom: 28px;*/
-	top: 800px;
+	top: 710px;
 }
 .timeline.hidden {
 	display: none;
@@ -186,7 +226,7 @@ a {
 	width: 1px;
 	height: 8px;
 	/*bottom:60px;*/
-	top: 785px;
+	top: 700px;
 }
 .timelineTick.hidden{
 	display: none;
@@ -194,9 +234,9 @@ a {
 #timelineText {
 	font-size:0.7em;
 	text-align: center;
-	-moz-transform: rotate(60.0deg);  /* FF3.5+ */
-	-o-transform: rotate(60.0deg);  /* Opera 10.5 */
-	-webkit-transform: rotate(60.0deg);  /* Saf3.1+, Chrome */
+	/*-moz-transform: rotate(60.0deg);  /* FF3.5+ */*/
+	/*-o-transform: rotate(60.0deg);  /* Opera 10.5 */*/
+	/*-webkit-transform: rotate(60.0deg);  /* Saf3.1+, Chrome */*/
 }
 
 /* Styling of our tooltip that pops out and displays relevant info on selected pixel */
@@ -205,7 +245,7 @@ a {
 	width: 200px;
 	height: auto;
 	padding: 5px;
-	background-color: #202323;
+	background-color:#000000;
 	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
@@ -223,4 +263,19 @@ a {
 	font-family: sans-serif;
 	font-size: 12px;
 	line-height: 18px;
+}
+
+#loading {
+	position: absolute;
+	top: 50%;
+	left: 45%;
+	width: 50px;
+	height: 50px;
+	font-size: 1em;
+	font-style: italic;
+	text-align: center;
+}
+
+#loading.hidden{
+	display: none;
 }
