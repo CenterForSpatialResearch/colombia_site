@@ -185,7 +185,7 @@
 	var buttonColorOn = "#d3d3d3";
 	var buttonColorOff = "#2f4f4f";
 	// var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_OUTPUT.csv";
-	var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_srtupdt_OUTPUT.csv";
+	var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_srtupdt2_OUTPUT.csv";
 	//Victims dataset
 	var datasetVictims = [];
 	//Timeline dataset
@@ -754,6 +754,9 @@
 		}
 		else if(_thisDataPt.autor_bacrim ==1) {
 			var _actorText = "BACRIM";
+		}
+		else if(_thisDataPt.autor_no_identifica == 33){
+			var _actorText = "Multiple Actors";
 		}
 		else {
 			var _actorText = "Other or Non-Identified";
