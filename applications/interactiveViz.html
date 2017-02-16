@@ -168,8 +168,9 @@
 	aspectRatio = window.innerWidth / window.innerHeight;	//SQUASH BUG HERE!!!
 	myHeight = viewSize;
 	myWidth = parseInt(viewSize*aspectRatio);
+	var originalWidth = myWidth;
 	var dataPadding = 284;
-	// For best viewing on my display, 1:3 ratio
+	// For best viewing on my display, 1:1 ratio
 	var rectSize = 1; //1
 	var rectSpacerW = rectSpacerH = 1; //3
 	var mouse = new THREE.Vector2();
@@ -583,6 +584,7 @@
 		renderer = new THREE.WebGLRenderer();
 		renderer.setPixelRatio( window.devicePixelRatio );
 		renderer.setSize(myWidth, myHeight);
+		// renderer.setSize(1439, 799)
 		container.appendChild( renderer.domElement );
 		// Displays our framerate in the ULH corner
 		// Event listeners that listen for when the mouse is moved or when the window is resized
@@ -796,7 +798,13 @@
 		//Calculate raycaster intersections (mouseover events) when we are not actively moving particles on screen
 		if (raycastOn) {
 			// Tell three JS where we are drawing our ray from and based on what point
-			raycaster.setFromCamera( mouse, camera );
+
+			// var raycastMouseX = map_range(worldX, 0, 1427, -0.9825, 0.7775000000000001);
+			var raycastMouseX = map_range(worldX, 0 ,originalWidth, -1, 1);
+			var raycastMouseY = map_range(worldY, 0, myHeight, 1, -1);
+			var raycastMouse = new THREE.Vector2(raycastMouseX, raycastMouseY);
+
+			raycaster.setFromCamera( raycastMouse, camera );
 			// Calculate what paricles if any the raycaster intersects
 			var intersections = raycaster.intersectObject(particles);
 			intersection = (intersections.length) > 0 ? intersections[0] : null;
