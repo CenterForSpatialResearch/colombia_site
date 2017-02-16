@@ -16,6 +16,14 @@ a {
 	color:#0078ff;
 }*/
 
+/*canvas {
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}*/
+
 /****** Header and Legend CSS Info *********/
 #victimTitle{
 	position: absolute;
@@ -61,6 +69,14 @@ a {
 	left: 240px;
 	width:70px;
 }
+
+#legend05{
+	position: absolute;
+	top:6px;
+	left: 320px;
+	width:70px;
+}
+
 #legendRect01{
 	position: absolute;
 	top: 10px;
@@ -93,7 +109,14 @@ a {
 	height: 5px;
 	background-color: #000000;
 }
-
+#legendRect05{
+	position: absolute;
+	top: 10px;
+	left: 312px;
+	width: 5px;
+	height: 5px;
+	background-color: #000000;
+}
 #legendGradient{
 	position:absolute;
 	top:10px;
@@ -222,7 +245,7 @@ a {
 	width: 200px;
 	height: auto;
 	padding: 5px;
-	background-color: #202323;
+	background-color:#000000;
 	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);

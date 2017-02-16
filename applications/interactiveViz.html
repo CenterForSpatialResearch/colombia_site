@@ -79,6 +79,11 @@
 			<p><span id="legend04Text"></span></p>
 		</div>
 		<div id="legendRect04"></div>
+		<div id="legend05">
+			<p><span id="legend05Text"></span></p>
+		</div>
+		<div id="legendRect05"></div>
+
 
 		<div id="legendGradient" class="hidden"></div>
 
@@ -179,7 +184,8 @@
 	var raycastOn;
 	var buttonColorOn = "#d3d3d3";
 	var buttonColorOff = "#2f4f4f";
-	var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_OUTPUT.csv";
+	// var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_OUTPUT.csv";
+	var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_srtupdt_OUTPUT.csv";
 	//Victims dataset
 	var datasetVictims = [];
 	//Timeline dataset
@@ -524,6 +530,7 @@
 		// Tell Three JS where it will be on the webpage
 		container = document.createElement( 'div' );
 		document.body.appendChild( container );
+
 		// Try to make camera and padding 0 and move the camera positon to center the grid
 		if(viewSize == 800){
 			horizPadding = 80;
@@ -643,7 +650,7 @@
 		else if(_thisDataPt.param_hecho == 6) {
 			return _color2;
 		}
-		else if(_thisDataPt.param_hecho == 2) {
+		else if(_thisDataPt.param_hecho == 12) {
 			return _color3;
 		}
 		else {
@@ -655,7 +662,8 @@
 		var _color1 = new THREE.Color('#e128aa');
 		var _color2 = new THREE.Color('#aae128');
 		var _color3 = new THREE.Color('#28aae1');
-		var _color4 = new THREE.Color('#595959');
+		var _color4 = new THREE.Color('#ff8c00');
+		var _color5 = new THREE.Color('#595959');
 		if (_thisDataPt.autor_guerrillas == 1) {
 			return _color1;
 		}
@@ -665,8 +673,11 @@
 		else if(_thisDataPt.autor_fuerza_publica == 1) {
 			return _color3;
 		}
-		else {
+		else if(_thisDataPt.autor_bacrim ==1) {
 			return _color4;
+		}
+		else {
+			return _color5;
 		}
 	}
 	function colorGender (_thisDataPt) {
@@ -740,6 +751,9 @@
 		}
 		else if(_thisDataPt.autor_fuerza_publica == 1) {
 			var _actorText = "Armed Forces";
+		}
+		else if(_thisDataPt.autor_bacrim ==1) {
+			var _actorText = "BACRIM";
 		}
 		else {
 			var _actorText = "Other or Non-Identified";
@@ -1047,8 +1061,10 @@
 		.style("background-color", "#000000");
 		d3.select("#legendRect04")
 		.style("background-color", "#fff");
+		d3.select("#legendRect05")
+		.style("background-color", "#000000");
 		d3.select("#legendGradient")
-		.classed("hidden", true)
+		.classed("hidden", true);
 		//Update a/o color buttons
 		d3.select("#colorHecho")
 		.style("background-color", buttonColorOff);
@@ -1076,6 +1092,8 @@
 		.text("Threat");
 		d3.select("#legend04Text")
 		.text("Other");
+		d3.select("#legend05Text")
+		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
 		.style("background-color", "#e65c00");
@@ -1085,8 +1103,10 @@
 		.style("background-color", "#3781d1");
 		d3.select("#legendRect04")
 		.style("background-color", "#595959");
+		d3.select("#legendRect05")
+		.style("background-color", "#000000");
 		d3.select("#legendGradient")
-		.classed("hidden", true)
+		.classed("hidden", true);
 		//Update a/o color buttons
 		d3.select("#colorKey")
 		.style("background-color", buttonColorOff);
@@ -1112,8 +1132,10 @@
 		.text("Paramilitaries");
 		d3.select("#legend03Text")
 		.text("Armed Forces");
-		d3.select("#legend04Text")
+		d3.select("#legend05Text")
 		.text("Other or Non-Identified");
+		d3.select("#legend04Text")
+		.text("BACRIM");
 		//Update legend rectangels
 		d3.select("#legendRect01")
 		.style("background-color", "#e128aa");
@@ -1121,10 +1143,12 @@
 		.style("background-color", "#aae128");
 		d3.select("#legendRect03")
 		.style("background-color", "#28aae1");
-		d3.select("#legendRect04")
+		d3.select("#legendRect05")
 		.style("background-color", "#595959");
+		d3.select("#legendRect04")
+		.style("background-color", "#ff8c00");
 		d3.select("#legendGradient")
-		.classed("hidden", true)
+		.classed("hidden", true);
 		//Update a/o color buttons
 		d3.select("#colorKey")
 		.style("background-color", buttonColorOff);
@@ -1152,6 +1176,8 @@
 		.text("Female");
 		d3.select("#legend04Text")
 		.text("Other or N/A");
+		d3.select("#legend05Text")
+		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
 		.style("background-color", "#000000");
@@ -1161,8 +1187,10 @@
 		.style("background-color", "#013f34");
 		d3.select("#legendRect04")
 		.style("background-color", "#11253e");
+		d3.select("#legendRect05")
+		.style("background-color", "#000000");
 		d3.select("#legendGradient")
-		.classed("hidden", true)
+		.classed("hidden", true);
 		//Update a/o color buttons
 		d3.select("#colorKey")
 		.style("background-color", buttonColorOff);
@@ -1191,6 +1219,8 @@
 		.text("Indigenous");
 		d3.select("#legend04Text")
 		.text("Other");
+		d3.select("#legend05Text")
+		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
 		.style("background-color", "#2db370");
@@ -1200,8 +1230,10 @@
 		.style("background-color", "#842db3");
 		d3.select("#legendRect04")
 		.style("background-color", "#595959");
+		d3.select("#legendRect05")
+		.style("background-color", "#000000");
 		d3.select("#legendGradient")
-		.classed("hidden", true)
+		.classed("hidden", true);
 		//Update a/o color buttons
 		d3.select("#colorKey")
 		.style("background-color", buttonColorOff);
@@ -1229,6 +1261,8 @@
 		.text("2015");
 		d3.select("#legend04Text")
 		.text("");
+		d3.select("#legend05Text")
+		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
 		.style("background-color", "#000000");
@@ -1238,6 +1272,8 @@
 		.style("background-color",  "#000000");
 		d3.select("#legendRect04")
 		.style("background-color", "#000000" );
+		d3.select("#legendRect05")
+		.style("background-color", "#000000");
 		d3.select("#legendGradient")
 		.classed("hidden", false)
 		//Update a/o color buttons
@@ -1267,6 +1303,8 @@
 		.text("1990");
 		d3.select("#legend04Text")
 		.text("2016");
+		d3.select("#legend05Text")
+		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
 		.style("background-color", "#000000");
@@ -1276,8 +1314,10 @@
 		.style("background-color", "#006465");
 		d3.select("#legendRect04")
 		.style("background-color", "#ff6360");
+		d3.select("#legendRect05")
+		.style("background-color", "#000000");
 		d3.select("#legendGradient")
-		.classed("hidden", true)
+		.classed("hidden", true);
 		//Update a/o color buttons
 		d3.select("#colorKey")
 		.style("background-color", buttonColorOff);
@@ -1290,7 +1330,7 @@
 		d3.select("#colorRace")
 		.style("background-color", buttonColorOff);
 		d3.select("#colorEventDate")
-		.style("background-color", buttonColorOff);col
+		.style("background-color", buttonColorOff);
 		//Update this color button
 		d3.select("#colorReportDate")
 		.style("background-color", buttonColorOn);
