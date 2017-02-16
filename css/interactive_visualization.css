@@ -32,8 +32,8 @@ a {
 }
 #legends{
 	position: absolute;
-	top:50px;
-	right:300px;
+	top:80px;
+	left:430px;
 	padding:5px;
 	font-size: .7em;
 }
@@ -92,6 +92,23 @@ a {
 	width: 5px;
 	height: 5px;
 	background-color: #000000;
+}
+
+#legendGradient{
+	position:absolute;
+	top:10px;
+	left:27px;
+	width: 128px;
+	height:5px;
+	background-color:#ffffff;
+	background: -webkit-linear-gradient(left, rgb(100,0,100) , rgb(100,255,100)); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(right, rgb(100,0,100) , rgb(100,255,100)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, rgb(100,0,100) , rgb(100,255,100)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, rgb(100,0,100) , rgb(100,255,100)); /* Standard syntax */
+}
+
+#legendGradient.hidden{
+	display: none;
 }
 
 /******* CSS Styling of Buttons to sort and color data ********/
