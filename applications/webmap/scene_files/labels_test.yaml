@@ -1,0 +1,78 @@
+sources:
+    osm:
+        type: TopoJSON
+        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-JUsa0Gc
+        min_zoom: 6
+        max_zoom: 16
+
+layers:
+    places:
+      data: {source: osm}
+      countries:
+        filter:
+          kind: [country]
+          $zoom: {min: 2, max: 9}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: function() {return 30 - feature.scalerank * 2 - (20 - $zoom) }
+              family: Roboto, helvetica, sans-serif
+              weight: 100
+              fill: '#ffffff'
+      large-cities:
+        filter:
+          all:
+            - not: {kind: [country, state, neighborhood]}
+            - population: { min: 500000 }
+            - $zoom: {min: 6}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: function() {return 20 - feature.scalerank * 1 - (13 - $zoom) }
+              family: Roboto, helvetica, sans-serif
+              weight: 100
+              fill: '#E5E5E5'
+      medium-cities:
+        filter:
+          all:
+            - not: {kind: [country, state, neighborhood]}
+            - population: { min: 100000, max: 500000 }
+            - $zoom: {min: 7}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: function() {return 20 - feature.scalerank * 1 - (13 - $zoom) }
+              family: Roboto, helvetica, sans-serif
+              weight: 100
+              fill: '#CCCCCC'
+      small-cities:
+        filter:
+          all:
+            - not: {kind: [country, state, neighborhood]}
+            - population: {max: 100000}
+            - $zoom: {min: 8}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: function() {return 20 - feature.scalerank * 1 - (13 - $zoom) }
+              family: Roboto, helvetica, sans-serif
+              weight: 100
+              fill: '#B2B2B2'
+      no-pop-cities:
+        filter:
+          all:
+            - not: {kind: [country, state, neighborhood]}
+            - population: false
+            - $zoom: {min: 8}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: function() {return 20 - feature.scalerank * 1 - (13 - $zoom) }
+              family: Roboto, helvetica, sans-serif
+              weight: 100
+              fill: '#B2B2B2'

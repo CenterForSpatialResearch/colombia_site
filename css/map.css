@@ -1,0 +1,84 @@
+body {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  background-color:black;
+}
+h1{
+  font-size:12px;
+}
+p{
+  font-size: 10px;
+}
+
+#map {
+  background: rgba(0, 0, 0, 0);
+  display: block;
+  position: absolute;
+  height: auto;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 50px;
+}
+#console{
+  height: auto;
+  width: 20%;
+  visibility: hidden;
+  float: right;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  padding: 3%;
+  margin: 3%;
+  z-index: 10000;
+  position: relative;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#image{
+  display: block;
+  margin: auto;
+  clear: both;
+  color: white;
+}
+#image img{
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+#title{
+  height:auto;
+  width:100%;
+  margin: 5% auto;
+}
+#masthead{
+  height: 6%;
+  width: auto;
+  background-color: rgba(0,0,0,0.5);
+  float: left;
+  padding: 20px;
+  position: absolute;
+  color: white;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+  -webkit-transition: height 0.8s;
+  -moz-transition: height 0.8s;
+  transition: height 0.8s;
+}
+#masthead:hover{
+  height: 36%;
+}
+#infoBars{
+  width:100%;
+  margin-top: 5%;
+  display: block;
+  position: relative;
+}
+.bar{
+  margin-top:10px;
+  height: 2px;
+  background:linear-gradient(to right, white, #ff7111);
+}
