@@ -33,13 +33,13 @@ styles:
                     normal.z *= u_scale;
                     normal = normalize(normal);
                     color = applyEnvmap(u_envmap, normal);
-    fadeterrain:
-        base: raster
-        mix: terrain-envmap
-        shaders:
-            blocks:
-                color: |
-                    color = color*vec4(1.5);
+    # fadeterrain:
+    #     base: raster
+    #     mix: terrain-envmap
+    #     shaders:
+    #         blocks:
+    #             color: |
+    #                 color = color*vec4(1.5);
     dots:
         base: lines
         dash: [1, 2]
