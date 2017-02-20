@@ -37,9 +37,6 @@ layers:
               family: Roboto, helvetica, sans-serif
               weight: 100
               fill: '#E5E5E5'
-              # stroke:
-              #   color: '#000000'
-              #   width: 2px
       medium-cities:
         filter:
           all:

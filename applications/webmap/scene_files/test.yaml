@@ -61,6 +61,8 @@ layers:
               width: 1px
     water:
         data: {source: osm}
+        filter:
+            $zoom: {min: 2, max: 16}
         draw:
             polygons:
                 order: 3
