@@ -11,15 +11,18 @@ layers:
       countries:
         filter:
           kind: [country]
-          $zoom: {min: 2, max: 9}
+          $zoom: {min: 2, max: 8}
         draw:
           text:
             font:
               transform: uppercase
               size: function() {return 30 - feature.scalerank * 2 - (20 - $zoom) }
               family: Roboto, helvetica, sans-serif
-              weight: 100
-              fill: '#ffffff'
+              weight: 300
+              fill: '#E5E5E5'
+              stroke:
+                color: '#000000'
+                width: 2px
       large-cities:
         filter:
           all:
@@ -30,10 +33,13 @@ layers:
           text:
             font:
               transform: uppercase
-              size: function() {return 20 - feature.scalerank * 1 - (13 - $zoom) }
+              size: function() {return 20 - feature.scalerank * 1 - (12 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 100
               fill: '#E5E5E5'
+              # stroke:
+              #   color: '#000000'
+              #   width: 2px
       medium-cities:
         filter:
           all:
@@ -44,35 +50,35 @@ layers:
           text:
             font:
               transform: uppercase
-              size: function() {return 20 - feature.scalerank * 1 - (13 - $zoom) }
+              size: function() {return 20 - feature.scalerank * 1 - (12 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 100
-              fill: '#CCCCCC'
+              fill: '#E5E5E5'
       small-cities:
         filter:
           all:
             - not: {kind: [country, state, neighborhood]}
             - population: {max: 100000}
-            - $zoom: {min: 8}
+            - $zoom: {min: 9}
         draw:
           text:
             font:
               transform: uppercase
-              size: function() {return 20 - feature.scalerank * 1 - (13 - $zoom) }
+              size: function() {return 20 - feature.scalerank * 1 - (12 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 100
-              fill: '#B2B2B2'
+              fill: '#E5E5E5'
       no-pop-cities:
         filter:
           all:
             - not: {kind: [country, state, neighborhood]}
             - population: false
-            - $zoom: {min: 8}
+            - $zoom: {min: 9}
         draw:
           text:
             font:
               transform: uppercase
-              size: function() {return 20 - feature.scalerank * 1 - (13 - $zoom) }
+              size: function() {return 20 - feature.scalerank * 1 - (12 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 100
-              fill: '#B2B2B2'
+              fill: '#E5E5E5'

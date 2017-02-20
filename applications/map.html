@@ -117,7 +117,7 @@
 
   map = (function () {
     'use strict';
-    var map_start_location = [4.624335, -74.063644, 6]; // Bogota
+    var map_start_location = [4.571028, -74.297231, 6]; // Bogota
 
     /*** URL parsing ***/
     var url_hash = window.location.hash.slice(1, window.location.hash.length).split('/');
@@ -132,7 +132,6 @@
 
     // ************************** TEST YAML **************************************
 
-    // var scene_url = 'webmap/scene_files/three-lights.yaml';
     var scene_url = 'webmap/scene_files/test.yaml';
 
     // If there is a query, use it as the scene_url
@@ -201,7 +200,7 @@
 }());
 
 //Limit users panning ability of the map
-map.setMaxBounds([[14, -65], [-2,-85]]);
+map.setMaxBounds([[17, -60], [-6,-85]]);
 //********* END OF MAPZEN CODE
 
 var lookup={}
@@ -216,7 +215,7 @@ var svg = d3.select(map.getPanes().overlayPane).append("svg"),
 g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
 //d3 function to read the geojson to an array
-d3.json("webmap/DisplacementLargeEdited_200+.geojson", function(error, collection) {
+d3.json("webmap/DisplacementLargeEdited_100+.geojson", function(error, collection) {
   if (error) throw error;
 
   //call function below to map geo points to screen coordinates
