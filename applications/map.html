@@ -400,6 +400,20 @@ var citiesNoAccent=[
       icon.setAttribute("onclick", 'markerClick(this.classList.item(3))');
     };
 
+    function getAllElementsWithAttribute(attribute, attributeString)
+    {
+      var matchingElements = [];
+      var allElements = document.getElementsByTagName('*');
+      for (var i =0, n = allElements.length; i<n; i++)
+      {
+        if (allElements[i].getAttribute(attribute) === attributeString)
+        {
+          matchingElements.push(allElements[i]);
+        }
+      }
+      return matchingElements;
+    }
+
     //on marker click, open data tray
     //save the ID of the last clicked city
     var lastClicked=0;
@@ -409,7 +423,13 @@ var citiesNoAccent=[
       [].forEach.call(paths, function(test){
         test.setAttribute("hide","1");
       });
-      var icon  = Array.prototype.slice.call(document.getElementsByClassName(city));
+      //grab the paths ending in our city and grab the image associated with our city
+      var destinationPathsAndImage = Array.prototype.slice.call(document.getElementsByClassName(city));
+      //grab all of the paths originatin in our clicked city
+      var originPaths = getAllElementsWithAttribute('origin', city);
+      //combine all our desired html elements into one array
+      var icon = Array.prototype.concat(originPaths, destinationPathsAndImage);
+
       lastClicked=city;
       [].forEach.call(icon, function(test){
         test.setAttribute("hide","0");
@@ -431,15 +451,15 @@ var citiesNoAccent=[
       for (i = 0;i<cities.length; i++)
       {
         if (city.replace(/-/g,' ') ==cities[i][0]){
-          $('#image').fadeTo(400,0);
+          // $('#image').fadeTo(400,0);    //fade bug
           info.innerHTML='<br>';
           info.innerHTML="<img src=webmap/img/"+citiesNoAccent[i]+".jpg>";
           info.style.display='block';
-          $('#image').fadeTo(400,1);
+          // $('#image').fadeTo(400,1);    //fade bug
           index=i;
           break;
         }else if (i==cities.length-1){
-          $('#image').fadeTo(400,0);
+          // $('#image').fadeTo(400,0);    //fade bug
           info.style.display='none';
         }
       }
@@ -465,20 +485,38 @@ var citiesNoAccent=[
       return cities[index];
     };
 
-    //reset lines when the map terrain is clicked
-    $(document).click(function(event){
-      if (event.target.classList.item(3)!=lastClicked){
-        var mapDiv = document.getElementById("console");
-        var paths = document.getElementsByTagName('path');
-        [].forEach.call(paths, function(test){
-          test.setAttribute("display", 'block');
-          test.setAttribute("hide","1");
-        });
-        setTimeout(function(){
-        }, 1000);
-        $(mapDiv).fadeTo(1000,0);
-      }
-    });
+    //reset lines when the map terrain is clicked but not when mouse terrain is dragged
+    var isDragging = false;
+    var startingPos = [];
+    $(document)
+      .mousedown(function (evt) {
+        isDragging = false;
+        startingPos = [evt.pageX, evt.pageY];
+      })
+      .mousemove(function(evt) {
+        if(!(evt.pageX === startingPos[0] && evt.pageY === startingPos[1])) {
+          isDragging = true;
+        }
+      })
+      .mouseup( function () {
+        if (isDragging) {
+        } else {
+          if (event.target.classList.item(3)!=lastClicked){
+            var mapDiv = document.getElementById("console");
+            var paths = document.getElementsByTagName('path');
+            [].forEach.call(paths, function(test){
+              test.setAttribute("display", 'block');
+              test.setAttribute("hide","1");
+            });
+            setTimeout(function(){
+            }, 1000);
+            // $(mapDiv).fadeTo(1000,0);    //fade bug
+          }
+        }
+        isDragging = false;
+        startingPos = [];
+      });
+
     </script>
     <!-- Mapzen map UI -->
     <script src='//mapzen.com/common/ui/mapzen-ui.min.js'></script>
