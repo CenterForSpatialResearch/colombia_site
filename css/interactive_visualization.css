@@ -27,9 +27,12 @@ a {
 /****** Header and Legend CSS Info *********/
 #victimTitle{
 	position: absolute;
-	top: 50px; width:100%;
+	top: 50px;
+	left: 10px;
+	width:100%;
 	padding: 5px;
 	text-align: left;
+	font-weight: 100;
 }
 #titleText{
 	font-size:.9em;
@@ -37,6 +40,7 @@ a {
 }
 #buttonText{
 	text-align:center;
+	font-weight: 100;
 }
 #legends{
 	position: absolute;
@@ -44,37 +48,39 @@ a {
 	left:430px;
 	padding:5px;
 	font-size: .7em;
+	font-weight: 100;
+	display: inline;
 }
 #legend01{
 	position: absolute;
 	top:6px;
 	left: 0px;
-	width:70px;
+	width:100px;
 }
 #legend02{
 	position: absolute;
 	top:6px;
-	left: 80px;
-	width:70px;
+	left: 100px;
+	width:100px;
 }
 #legend03{
 	position: absolute;
 	top:6px;
-	left: 160px;
-	width:70px;
+	left: 200px;
+	width:100px;
 }
 #legend04{
 	position: absolute;
 	top:6px;
-	left: 240px;
-	width:70px;
+	left: 300px;
+	width:100px;
 }
 
 #legend05{
 	position: absolute;
 	top:6px;
-	left: 320px;
-	width:70px;
+	left: 400px;
+	width:100px;
 }
 
 #legendRect01{
@@ -88,7 +94,7 @@ a {
 #legendRect02{
 	position: absolute;
 	top: 10px;
-	left: 72px;
+	left: 92px;
 	width: 5px;
 	height: 5px;
 	background-color: #000000;
@@ -96,7 +102,7 @@ a {
 #legendRect03{
 	position: absolute;
 	top: 10px;
-	left: 152px;
+	left: 192px;
 	width: 5px;
 	height: 5px;
 	background-color: #000000;
@@ -104,7 +110,7 @@ a {
 #legendRect04{
 	position: absolute;
 	top: 10px;
-	left: 232px;
+	left: 292px;
 	width: 5px;
 	height: 5px;
 	background-color: #000000;
@@ -112,7 +118,7 @@ a {
 #legendRect05{
 	position: absolute;
 	top: 10px;
-	left: 312px;
+	left: 392px;
 	width: 5px;
 	height: 5px;
 	background-color: #000000;
@@ -121,7 +127,7 @@ a {
 	position:absolute;
 	top:10px;
 	left:27px;
-	width: 128px;
+	width: 170px;
 	height:5px;
 	background-color:#ffffff;
 	background: -webkit-linear-gradient(left, rgb(100,0,100) , rgb(100,255,100)); /* For Safari 5.1 to 6.0 */
@@ -156,28 +162,28 @@ a {
 #colorTitle{
 	/*width:450px;*/
 	/*top:85px;*/
-	left: 5px;
+	left: 15px;
 }
 #colorKey{
 	left: 183px;
 }
 #colorHecho{
-	left: 70px;
+	left: 80px;
 }
 #colorActor{
-	left: 135px;
+	left: 145px;
 }
 #colorGender{
-	left: 200px;
+	left: 210px;
 }
 #colorRace{
-	left: 265px;
+	left: 275px;
 }
 #colorEventDate{
-	left: 330px;
+	left: 340px;
 }
 #colorReportDate{
-	left: 395px;
+	left: 405px;
 }
 
 /*Buttons to color the data */
@@ -234,6 +240,7 @@ a {
 #timelineText {
 	font-size:0.7em;
 	text-align: center;
+	font-weight: 100;
 	/*-moz-transform: rotate(60.0deg);  /* FF3.5+ */*/
 	/*-o-transform: rotate(60.0deg);  /* Opera 10.5 */*/
 	/*-webkit-transform: rotate(60.0deg);  /* Saf3.1+, Chrome */*/
@@ -260,9 +267,9 @@ a {
 /*Tooltip paragraph styling*/
 #tooltip p {
 	margin: 0;
-	font-family: sans-serif;
 	font-size: 12px;
 	line-height: 18px;
+	font-weight: 100;
 }
 
 #loading {
