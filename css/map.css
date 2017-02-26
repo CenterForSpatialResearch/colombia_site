@@ -6,6 +6,7 @@ body {
 }
 h1{
   font-size:12px;
+  line-height: 50%;
 }
 p{
   font-size: 10px;
@@ -23,6 +24,7 @@ p{
   margin-top: 50px;
 }
 #console{
+  top: 220px;
   height: auto;
   width: 20%;
   visibility: hidden;
@@ -54,22 +56,32 @@ p{
   margin: 5% auto;
 }
 #masthead{
-  height: 6%;
-  width: auto;
+  height: 210px;
+  width: 350px;
   background-color: rgba(0,0,0,0.5);
-  float: left;
+  float: right;
   padding: 20px;
   position: absolute;
   color: white;
-  bottom: 0;
-  left: 0;
-  z-index: 10000;
+  top: 0px;
+  right: 0px;
+  z-index: 1000;
   -webkit-transition: height 0.8s;
   -moz-transition: height 0.8s;
   transition: height 0.8s;
 }
-#masthead:hover{
+#credits{
+  position:absolute;
+  text-align: right;
+  bottom:20px;
+  right:0;
+  z-index: 1000;
+}
+/*#masthead:hover{
   height: 36%;
+}*/
+#masthead p{
+  line-height:50%;
 }
 #infoBars{
   width:100%;
@@ -80,5 +92,26 @@ p{
 .bar{
   margin-top:10px;
   height: 2px;
-  background:linear-gradient(to right, white, #ff7111);
+  background: #ff7111;
+}
+.bar4Legend{
+  float:left;
+  height: 2px;
+  background: #ff7111;
+  width: 12.5%;
+  height:auto;
+}
+#barLegend{
+  display: inline-block;
+  width:100%;
+  height: auto;
+}
+#barLegend ul{
+  display: inline;
+  list-style: none;
+  padding-left:0;
+}
+#barLegend li{
+  display: inline;
+  list-style-type: none;
 }
