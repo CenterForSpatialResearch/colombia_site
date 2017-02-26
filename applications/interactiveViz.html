@@ -179,8 +179,7 @@
 	var raycastOn;
 	var buttonColorOn = "#7F7F7F";
 	var buttonColorOff = "#333333";
-	// var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_OUTPUT.csv";
-	var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_srtupdt2_OUTPUT.csv";
+	var myFileDataPath = "data/200kInteractiveVizSmall.csv";
 	//Victims dataset
 	var datasetVictims = [];
 	//Timeline dataset
@@ -282,7 +281,7 @@
 				//By default, csv loads all data as strings, here we parse the data into other data types
 				res.forEach(function(d,i) {
 					d.key = i;							//we also add a temporary key value
-					d.cod_persona = +d.cod_persona;
+					// d.cod_persona = +d.cod_persona;
 					d.param_hecho = +d.param_hecho;
 					d.uniqueRank_param_hecho = +d.uniqueRank_param_hecho;
 					d.uniqueRank_pert_etnica = +d.uniqueRank_pert_etnica;
@@ -295,7 +294,7 @@
 						d.pert_etnica = "Afrocolombian";
 					}
 					else if (d.pert_etnica == "Gitano(a) ROM") {
-						d.pert_etnica = "ROM";
+						d.pert_etnica = "Other";
 					}
 					else if (d.pert_etnica == "Indigena") {
 						d.pert_etnica = "Indigenous";
@@ -603,7 +602,7 @@
 
 	function onWindowResize( event ) {
 		//Variables to update whenever the browser window is resized
-		console.log("Window resized");
+		// console.log("Window resized");
 		windowHalfX = window.innerWidth / 2;
 		windowHalfY = window.innerHeight / 2;
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -728,9 +727,9 @@
 			var _eventText = "Displacement";
 		}
 		else if(_thisDataPt.param_hecho == 6) {
-			var _eventText = "Homocide";
+			var _eventText = "Homicide";
 		}
-		else if(_thisDataPt.param_hecho == 2) {
+		else if(_thisDataPt.param_hecho == 12) {
 			var _eventText = "Threat";
 		}
 		else {
@@ -757,7 +756,14 @@
 			var _actorText = "Other or Non-Identified";
 		}
 		textList[2] = textList[2] + _actorText;
-		textList[3] = textList[3] + _thisDataPt.genero_hom;
+		// textList[3] = textList[3] + _thisDataPt.genero_hom;
+		if (_thisDataPt.genero_hom == "Hombre"){
+			textList[3] = textList[3] + "Male";
+		} else if (_thisDataPt.genero_hom == "Mujer"){
+			textList[3] = textList[3] + "Female";
+		} else {
+			textList[3] = textList[3] + "Other or N/A";
+		}
 		textList[4] = textList[4] + _thisDataPt.pert_etnica;
 		return textList;
 	}
