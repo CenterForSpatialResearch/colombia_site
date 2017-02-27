@@ -24,21 +24,22 @@ p{
   margin-top: 50px;
 }
 #console{
-  top: 230px;
+  /*top: 230px;*/
   height: auto;
-  width: 20%;
+  /*width: 20%;*/
   visibility: hidden;
-  float: right;
+  /*float: right;*/
   background-color: rgba(0,0,0,0.5);
   color: white;
-  padding: 3%;
-  margin: 3%;
+  /*padding: 3%;*/
+  /*margin: 3%;*/
   z-index: 10000;
   position: relative;
   opacity: 0;
   pointer-events: none;
+  margin-top: 15px;
+  font-family: 'Roboto', helvetica, sans-serif;
 }
-
 #image{
   display: block;
   margin: auto;
@@ -53,14 +54,17 @@ p{
 #title{
   height:auto;
   width:100%;
-  margin: 5% auto;
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: 1.5em;
 }
 #masthead{
-  height: 210px;
+  /*height: 210px;*/
   width: 350px;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.9);
   float: right;
   padding: 20px;
+  padding-bottom: 0px;
   position: absolute;
   color: white;
   top: 0px;
@@ -70,6 +74,15 @@ p{
   -moz-transition: height 0.8s;
   transition: height 0.8s;
 }
+#masthead > h1{
+  font-family: 'Roboto', helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 1.25em;
+  line-height: 120%;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
 #credits{
   position:absolute;
   text-align: right;
@@ -77,21 +90,26 @@ p{
   right:0;
   z-index: 1000;
 }
-/*#masthead:hover{
-  height: 36%;
-}*/
 #masthead p{
-  line-height:50%;
+  line-height: 50%;
+  font-family: 'Roboto', helvetica, sans-serif;
+  font-weight: 100;
+  font-size: .9em;
 }
 #infoBars{
   width:100%;
-  margin-top: 5%;
+  margin-top: 2%;
   display: block;
   position: relative;
 }
+#infoBars p {
+  font-size: .9em;
+  font-weight: 100;
+  margin-bottom: 12px;
+}
 .bar{
-  margin-top:10px;
-  height: 2px;
+  margin-bottom: 8px;
+  height: 3px;
   background: #ff7111;
 }
 .bar4Legend{
@@ -105,6 +123,12 @@ p{
   display: inline-block;
   width:100%;
   height: auto;
+  margin-top: 5px;
+}
+#barLegend p {
+  font-family: 'Roboto', helvetica, sans-serif;
+  font-weight: 100;
+  font-size: .75em;
 }
 #barLegend ul{
   display: inline;
@@ -114,4 +138,27 @@ p{
 #barLegend li{
   display: inline;
   list-style-type: none;
+}
+.leaflet-container .leaflet-control-attribution {
+  background-color: #000000;
+}
+.leaflet-control-attribution a {
+  color: #7F7F7F;
+  text-decoration: underline;
+}
+.leaflet-control-attribution p {
+  color: #7F7F7F;
+}
+.leaflet-container .leaflet-control {
+  color: #7F7F7F;
+}
+.leaflet-touch .leaflet-bar a {
+  background-color: #000000;
+  border-color: #7F7F7F;
+  border-width: 1px;
+  border-style: solid;
+  color: #BFBFBF;
+}
+.leaflet-bar a.leaflet-disabled {
+  color: #7F7F7F;
 }
