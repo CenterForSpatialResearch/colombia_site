@@ -162,3 +162,25 @@ p{
 .leaflet-bar a.leaflet-disabled {
   color: #7F7F7F;
 }
+.leaflet-touch .leaflet-control-zoom-out {
+  font-family: 'Roboto', helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 2em;
+}
+.leaflet-touch .leaflet-control-zoom-in {
+  font-family: 'Roboto', helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 1.5em;
+}
+.leaflet-bar {
+  border-radius: 0px;
+}
+.leaflet-bar a:first-child {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.leaflet-bar a:last-child {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-width: 0px;
+}
