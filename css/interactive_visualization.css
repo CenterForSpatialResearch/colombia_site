@@ -155,6 +155,7 @@ a {
 	/*display: -webkit-flex;*/
 	/*display: flex;*/
 	/*align-items: center;*/
+	cursor:pointer;
 }
 .color{
 	left: 1px;
