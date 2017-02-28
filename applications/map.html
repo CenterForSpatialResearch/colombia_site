@@ -338,7 +338,9 @@
 
     var maxBarLen = Math.max(thisMunicipPop, thisMunicipDisplaced, thisMunicipRefugees, thisMunicipIDPS);
 
+    //Display the console and info bars
     mapDiv.style.visibility="visible";
+    document.getElementById("infoBars").style.display='block';
 
     $("#population").animate({'width':''+100*thisMunicipPop/maxBarLen+"%"});
     document.getElementById("ptext").innerHTML=""+ thisMunicipPop +" | Population (2005)";
@@ -349,6 +351,8 @@
     $("#ipc").animate({'width':''+100*thisMunicipIDPS/maxBarLen+"%"});
     document.getElementById("itext").innerHTML=""+ thisMunicipIDPS +" | IDP's (1985-2015)";
     $(mapDiv).fadeTo(1000,1)
+
+
 
   };
 
@@ -524,6 +528,15 @@
       .mouseup( function () {
         if (isDragging) {
         } else {
+          //It's a new click get rid of our console div
+          document.getElementById("console").style.visibility = 'hidden';
+          // var info = document.getElementById("image");
+          // info.innerHTML='<br>';
+          // info.innerHTML="<img src=webmap/img/Image_"+selectedMunicip[i].ID+".png>";
+          // info.style.display='none';
+          document.getElementById("image").style.display='none';
+          document.getElementById("infoBars").style.display='none';
+
           if (event.target.classList.item(3)!=lastClicked){
             var mapDiv = document.getElementById("console");
             var paths = document.getElementsByTagName('path');
