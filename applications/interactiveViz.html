@@ -171,10 +171,10 @@
 	var originalWidth = myWidth;
 	var dataPadding = 284;
 	// For best viewing on my display, 1:1 ratio
-	var rectSize = 1; //1
-	var rectSpacerW = rectSpacerH = 1; //3
+	var rectSize = 1.5; //1.5 //1
+	var rectSpacerW = rectSpacerH = 0.5; //1
 	var mouse = new THREE.Vector2();
-	var threshold = rectSpacerW*2;
+	var threshold = rectSize; //rectSpacerW*2;
 	var sphere;
 	var raycastOn;
 	var buttonColorOn = "#7F7F7F";
@@ -560,7 +560,7 @@
 			vertex.direction = vertex.startPosition.clone().sub(vertex.endPosition);
 			vertex.copy(vertex.startPosition);
 			geometry.vertices.push( vertex );
-			colors[i] = colorActor(thisDataPt);
+			colors[i] = colorHecho(thisDataPt);
 		}
 		// Assign our desired color to each piece of geometry
 		geometry.colors = colors;
@@ -593,7 +593,7 @@
 		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		// For user friendliness, we identify how we are sorting and coloring to begin by showing the appropriate legend and color
 		updateUiSortEventDate();
-		updateUiColorActor();
+		updateUiColorHecho();
 	}
 
 	// #############################################################################
@@ -721,7 +721,16 @@
 	function getTooltipText (_thisDataPt) {
 		//Parse Text For ToolTip Mousover
 		var textList = ["Event Date: ", "Type of Event: ", "Actor: ", "Gender: ", "Ethnicity: "];
-		textList[0] = textList[0] + _thisDataPt.f_ocurrencia_hecho.slice(0, -5);
+		var monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var dateArray = _thisDataPt.f_ocurrencia_hecho.slice(0, -5).split("/");
+		if (dateArray[2] > 20){
+			var thisYear = '19' + dateArray[2];
+		}
+		else {
+			var thisYear = '20' + dateArray[2];
+		}
+		// textList[0] = textList[0] + _thisDataPt.f_ocurrencia_hecho.slice(0, -5);
+		textList[0] = textList[0] + monthList[dateArray[0]-1] + ' ' + dateArray[1] + ', ' + thisYear;
 		//Parse event data into text
 		if(_thisDataPt.param_hecho == 5) {
 			var _eventText = "Displacement";
