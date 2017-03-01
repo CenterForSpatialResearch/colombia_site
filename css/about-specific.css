@@ -1,11 +1,14 @@
 /****** General ******/
 body {
-	background-color: #000000;
+	padding-bottom: 20px;
+	background-color: #191919;
 	color: #ffffff;
 	font-family: 'Roboto', helvetica, sans-serif;
 }
 .container-narrow {
 	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /******* Navbar ******/
@@ -73,9 +76,11 @@ h2 {
 }
 .image-row {
 	margin-top: 20px;
+	margin-bottom: 10px;
 }
 p.image-caption {
 	color: #ffffff;
 	font-size: 1em;
 	font-weight: 100;
+	margin-top: 10px;
 }

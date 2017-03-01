@@ -11,8 +11,8 @@
   <link href="../css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles -->
-  <link rel="stylesheet" type="text/css" href="../css/project-specific.css">
 	<link rel="stylesheet" type="text/css" href="../css/site-specific.css">
+  <link rel="stylesheet" type="text/css" href="../css/about-specific.css">
 
   <!-- Google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700" rel="stylesheet">
@@ -51,7 +51,7 @@
 
 	<!-- ****** About text ****** -->
 	<div class="section">
-		<div class="container-narrow">
+		<div class="container container-narrow">
 			<h2>ABOUT</h2>
 			<p>Over the course of the last thirty years, almost 7 million Colombians
 				have left their homes and towns in a search for safety.This mass migration,
@@ -90,17 +90,143 @@
 				cognizant of socio-spatial phenomena.</p>
 			<h2>INTERACTIVE MAP</h2>
       <p>Our interactive map shows the paths of internally displaced people from 1985 to 2015.
-      The thickness of the lines represent the number of people that were displaced, from 100 to 40,0000,
+      The thickness of the lines represents the number of people that were displaced, from 100 to 40,0000,
       and the colors represent the direction of the displacement, white is the origin and orange the destination.<br><br>
-      You can also click on some of the municipalities to see only the displacements to and from that
-      location, and to bring up a side panel with more information. This panel contains a satellite
+      You can click on some of the municipalities to see only the displacements to and from that
+      location and to bring up a side panel with more information. This panel contains a satellite
       image of the selected municipality (courtesy of NASA Goddard Space Flight Center and U.S. Geological Survey),
       the latest population data from the Colombian National Department of Statistics (DANE), the total number
-      of displaced people that left that municipality, the total number of displaced people that arrived to that
-      location, and the total number of people that were displaced within that municipality.
-      </p>
+      of displaced people from that municipality, the total number of displaced people that arrived to that
+      location, and the total number of people that were displaced within that municipality.<br><br>
+      Some of the interesting things you can see in the map are, for example, the large number of displaced
+      people that moved from small towns to large cities like Bogotá, Medellín or Cali.</p>
+      <div class="row image-row">
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/bogota.png" alt="thumb">
+          <p class="image-caption">Displacement to Bogotá, coming from the whole country.</p>
+        </div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/medellin.png" alt="thumb">
+          <p class="image-caption">Displacement to Medellín, mostly from the department of Antioquia and the Urabá region.</p>
+        </div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/cali.png" alt="thumb">
+          <p class="image-caption">Regional displacement to Cali, from the Pacific coast and the south west of the country.</p>
+        </div>
+      </div>
+      <p>It is also possible to see the large displacements that occurred around the most infamous massacres of the the conflict: for example, the attack on Bojayá by the FARC, the taking of Riosucio by the paramilitaries - aided by the Colombian army - or the current wave of displacement taking place in and around Buenaventura.</p>
+      <div class="row image-row">
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/bellavista.png" alt="thumb">
+          <p class="image-caption">Displacement from Bojayá (Bellavista), mostly towards Quibdó.</p>
+        </div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/riosucio.png" alt="thumb">
+          <p class="image-caption">Displacement from Riosucio to multiple municipalities in the region.</p>
+        </div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/buenaventura.png" alt="thumb">
+          <p class="image-caption">In the past 4 years forced displacement in and around Buenaventura has increased dramatically.</p>
+        </div>
+      </div>
+      <p>Finally, the map also highlights other aspects of the conflict that are not that well known or understood: it makes clear that municipalities like Florencia, Popayán or Pasto in the southwest also received massive amounts of displaced people, and that all the main cities along the Atlantic coast, Cartagena, Barranquilla, Santa Marta and Riohacha, have been destinations for scores of displaced people.</p>
+      <div class="row image-row">
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/florencia.png" alt="thumb">
+          <p class="image-caption">Located at the foothill of the mountains in the south of the country, Florencia (Caquetá) receives large amounts of displaced people from that region.</p>
+        </div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/cartagena.png" alt="thumb">
+          <p class="image-caption">Cartagena has become one of the main destinations of displaced people from Colombia's northern municipalities.</p>
+        </div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="../img/aboutImg/santaMarta.png" alt="thumb">
+          <p class="image-caption">Similarly, Santa Marta also receives scores of displaced people from the mountains around it and from the larger Atlantic coast region.</p>
+        </div>
+      </div>
+      <p>Overall, though, what the map really reveals is how the conflict has enveloped the whole country in a deep and intricate web of displacement and violence. More than the individual displacements that have occurred from the country side to the cities or within small and medium-sized municipalities, this kind of visualization provides a way of grasping the intricacies and complexity of the war.</p>
       <h2>VIDEO ANIMATION</h2>
+      <p>Similar to the map, the video animation shows the displacement of people from 1985 to 2015.
+        However, to visualize the temporal as well as the spatial dimensions of the conflict we use
+         a simple particle system that animates every single displacement in the dataset. The advantages
+         of showing this information in video form are that it allows us to display a rather complex
+         dataset in a single diagram while still conveying a sense of dynamism that a static graph
+         cannot produce.<br><br>The animation shows how in the late 1980s and early 1990s
+         displacement was mostly confined to the regions around Medellín and Urabá, and how starting
+         in the late 1990s there was not just an increase in the number of displaced people but an
+         expansion of forced displacement to the rest of the country. By the mid 2000s the
+         visualization clearly shows how the whole country is covered in forced displacement and
+         the south-west of the country has also become a center for this type of violence.<br><br>
+       In addition, this type of visualization also allows us to zoom into specific moments and
+       places in the conflict while still providing relevant contextual information through text
+       annotations. For example, we can see the exact moment in which the FARC attacked Mitú
+       displacing more than 1,000 of its inhabitants, killing almost 150 and kidnapping more
+       than 100 people. Or the permanent flow of displacement that has been going on from
+       Buenaventura to Cali and Bogotá since 2013.</p>
       <h2>INTERACTIVE VISUALIZATION</h2>
+      <p>Another way in which we have visualized the Colombian conflict is by creating an
+         interactive visualization of 200,000 randomly selected victims, each represented as a pixel and sorted
+         and color-coded based on different attributes. By maintaining the granularity of the
+         dataset and looking at it victim by victim certain known patterns are clearly revealed
+         and other, not as apparent in the data, become evident.<br><br>For example, in the image below
+         the victims are sorted (left to right) by the date in which the victimizing event
+         occurred and color-coded by the type of event. Here we can see how most massacres and
+         homicides (in teal) occurred between 1985 and 1997, while the bulk of the displacements
+         (in orange) happened after that. We can also see how, starting in 2012, the number of
+         threats (in blue) has grown dramatically.
+       </p>
+       <div class="row image-row">
+         <div class="col-md-12">
+           <img class="img-responsive" src="../img/aboutImg/hecho.png" alt="thumb">
+           <p class="image-caption">Random sample of 200,000 victims, sorted by date of event and color-coded by type of crime.</p>
+         </div>
+       </div>
+       <p>If, instead, we color-code the pixels by the group that committed the crimes and maintain
+         the order, we can see how the paramilitary groups (in green) were most active between 1995
+         and 2006, which coincides with their official demobilization date. Similarly, we can see
+         how after 2010 the number of victims from "Other" groups (in gray) has increased
+         dramatically. This "Other" group includes the new small criminal bands (BACRIM in Spanish)
+         which emerged from some of the demobilized paramilitary groups.</p>
+         <div class="row image-row">
+           <div class="col-md-12">
+             <img class="img-responsive" src="../img/aboutImg/actor.png" alt="thumb">
+             <p class="image-caption">Random sample of 200,000 victims, sorted by date of event and color-coded by actor reported to have committed the crime.</p>
+           </div>
+         </div>
+         <p>Finally, if we instead sort the pixels by the date in which the report of the crime
+           was filed and color-code them by the type of crime, three striking patterns emerge
+           from the data: one, it is clear that from mid 2008 to mid 2010 there was a concerted
+           effort to collect reports on homicides and massacres (in teal); two, from mid 2010 to
+           2012 the reports that were collected were almost exclusively about displacement
+           (in orange); and, three, starting in 2012, there seems to be more variation in the
+           types of crimes that were reported.</p>
+           <div class="row image-row">
+             <div class="col-md-12">
+               <img class="img-responsive" src="../img/aboutImg/report.png" alt="thumb">
+               <p class="image-caption">Random sample of 200,000 victims, sorted by date of report and color-coded by type of crime.</p>
+             </div>
+           </div>
+           <p>Simillarly, if we keep the data sorted by the date in which the report was filed
+             but we color-code instead by the date in which the crime occurred we see clearly how
+             starting in mid 2008 there was a big push to collect more data about older crimes. This
+             effort continues for two years and then decreases slightly but not too much, and it is only
+             during the second half of 2015 that the majority of reports collected are from recent events.</p>
+             <div class="row image-row">
+               <div class="col-md-12">
+                 <img class="img-responsive" src="../img/aboutImg/eventDate.png" alt="thumb">
+                 <p class="image-caption">Random sample of 200,000 victims, sorted by date of report and color-coded by date of the crime.</p>
+               </div>
+             </div>
+           <p>These patterns reveal more about the
+           collection process than about the actual crimes that were committed, and as such,
+           tell us something about how the data was gathered by the government. This, in turn,
+           should help us question the dataset itself and treat it with the necessary skepticism
+           and care. For example, why was there such a clear effort to collect data about
+           massacres between 2008 and 2010? And why did this focus switch to collecting reports
+           about displacement? We suspect this has much more to do with the political realities
+           at the time than with the conditions on the ground. Ultimately, however, this
+           does not mean that the data itself is false but only that it is the product of a
+           specific collection effort and thus, might not capture the whole reality.</p>
 			<h2>TEAM</h2>
 			<p><a href="http://c4sr.columbia.edu/people">Laura Kurgan</a> is an Associate Professor of Architecture at the Graduate School of Architecture Planning and Preservation at Columbia University, where she directs the Visual Studies curriculum, and the Center for Spatial Research. She is the author of Close Up at a Distance: Mapping, Technology, and Politics (Zone Books, 2013). Her work explores things ranging from digital mapping technologies to the ethics and politics of mapping, and the art, science and visualization of data.</p>
 			<p><a href="http://juanfrans.com/">Juan Francisco Saldarriaga</a> is an Associate Research Scholar at the Center for Spatial Research at Columbia University and an adjunct assistant professor of urban planning and architecture at the Graduate School of Architecture, Planning and Preservation (GSAPP). He does research at the intersection of data, GIS, urbanism, architecture and the humanities and teaches graduate level seminars on mapping, advanced GIS and data visualization.</p>
@@ -109,8 +235,8 @@
 		</div>
 		<div class="social_link">
 			<ul class="social_link">
-				<li class="social_link"><a href="http://www.facebook.com/share.php?u=http://gsapp-ap.com/&title=GSAPP.ap" target="_blank"><img src="../img/social/FB-f-Logo__white_100.png" height="25px"></a></li>
-				<li class="social_link"><a href="http://twitter.com/intent/tweet?status=GSAPP.ap+http://gsapp-ap.com/" target="_blank"><img src="../img/social/Twitter_Logo_White_On_Image.png" height="30px"></a></li>
+				<li class="social_link"><a href="http://www.facebook.com/share.php?u=https://centerforspatialresearch.github.io/colombia_site/&title=Conflict Urbanism: Colombia" target="_blank"><img src="../img/social/FB-f-Logo__white_100.png" height="25px"></a></li>
+        <li class="social_link"><a href="http://twitter.com/intent/tweet?status=Conflict Urbanism: Colombia+https://centerforspatialresearch.github.io/colombia_site/" target="_blank"><img src="../img/social/Twitter_Logo_White_On_Image.png" height="30px"></a></li>
 			</ul>
 		</div>
 	</div>
