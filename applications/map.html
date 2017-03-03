@@ -27,7 +27,7 @@
     ga('send', 'pageview');
 
   </script>
-  
+
 </head>
 <body>
   <!-- ******* Navbar ******* -->
@@ -354,13 +354,13 @@
     document.getElementById("infoBars").style.display='block';
 
     $("#population").animate({'width':''+100*thisMunicipPop/maxBarLen+"%"});
-    document.getElementById("ptext").innerHTML=""+ thisMunicipPop +" | Population (2005)";
+    document.getElementById("ptext").innerHTML=""+ thisMunicipPop.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Population (2005)";
     $("#desplazados").animate({'width':''+100*thisMunicipDisplaced/maxBarLen+"%"});
-    document.getElementById("dtext").innerHTML=""+ thisMunicipDisplaced +" | Displaced (1985-2015)";
+    document.getElementById("dtext").innerHTML=""+ thisMunicipDisplaced.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Displaced (1985-2015)";
     $("#refugiados").animate({'width':''+100*thisMunicipRefugees/maxBarLen+"%"});
-    document.getElementById("rtext").innerHTML=""+ thisMunicipRefugees +" | Refugees (1985-2015)";
+    document.getElementById("rtext").innerHTML=""+ thisMunicipRefugees.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Refugees (1985-2015)";
     $("#ipc").animate({'width':''+100*thisMunicipIDPS/maxBarLen+"%"});
-    document.getElementById("itext").innerHTML=""+ thisMunicipIDPS +" | IDP's (1985-2015)";
+    document.getElementById("itext").innerHTML=""+ thisMunicipIDPS.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 IDP's (1985-2015)";
     $(mapDiv).fadeTo(1000,1)
 
 
