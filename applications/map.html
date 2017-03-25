@@ -534,12 +534,12 @@
         isDragging = false;
         startingPos = [evt.pageX, evt.pageY];
       })
-      .mousemove(function(evt) {
+      .mousemove(function (evt) {
         if(!(evt.pageX === startingPos[0] && evt.pageY === startingPos[1])) {
           isDragging = true;
         }
       })
-      .mouseup( function () {
+      .mouseup( function (evt) {
         if (isDragging) {
         } else {
           //It's a new click get rid of our console div
@@ -551,7 +551,7 @@
           document.getElementById("image").style.display='none';
           document.getElementById("infoBars").style.display='none';
 
-          if (event.target.classList.item(3)!=lastClicked){
+          if (evt.target.classList.item(3)!=lastClicked){
             var mapDiv = document.getElementById("console");
             var paths = document.getElementsByTagName('path');
             [].forEach.call(paths, function(test){
