@@ -116,6 +116,7 @@
         <div id ="ipc" class = "bar"></div>
         <p id="itext"></p>
       </div>
+      <div id="municipText"><p>This is my practice text!!!</p></div>
     </div>
   </div>
   <svg>
@@ -263,19 +264,27 @@
   }
 
   var selectedMunicip;
-  var myFileName = 'data/SelectedMunicipalities.tsv'
-  parseMyFile(myFileName);
+  var textSelectedMunicip;
+  var myFileNames = ['data/SelectedMunicipalities.tsv', 'data/TextSelectedMunicipalities.tsv']
+  parseMyFile(myFileNames);
 
-  function parseMyFile(myFileName) {
+  function parseMyFile(myFileNames) {
     var q = d3.queue();
+    //load the municipalities that we want to be clickable
     q.defer(function(callback) {
-      d3.tsv(myFileName, function(res) {
+      d3.tsv(myFileNames[0], function(res) {
         //Passes data to the queue once we have loaded datat
         callback(null, res);
       });
     });
+    //load the text tsv
+    q.defer(function(callback) {
+      d3.tsv(myFileNames[1], function(res2) {
+        callback(null, res2);
+      });
+    });
     //Once data has loaded, execute rest of code
-    q.await(restOfCode);
+    q.awaitAll(restOfCode);
   };
 
   // #############################################################################
@@ -353,7 +362,8 @@
     var maxBarLen = Math.max(thisMunicipPop, thisMunicipDisplaced, thisMunicipRefugees, thisMunicipIDPS);
 
     //Display the console and info bars
-    mapDiv.style.visibility="visible";
+    // mapDiv.style.visibility="visible";
+    mapDiv.style.display="block"
     document.getElementById("infoBars").style.display='block';
 
     $("#population").animate({'width':''+100*thisMunicipPop/maxBarLen+"%"});
@@ -366,7 +376,15 @@
     document.getElementById("itext").innerHTML=""+ thisMunicipIDPS.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 IDP's (1985-2015)";
     $(mapDiv).fadeTo(1000,1)
 
-
+    //For the municipalities that have text to display in the console, we find it here. A/o are null
+    var myMunicipText = document.getElementById("municipText");
+    var textToDisplay = "";
+    for (var i in textSelectedMunicip){
+      if ( parseInt(textSelectedMunicip[i].ID) == parseInt(city) ){
+        textToDisplay = textSelectedMunicip[i].Text;
+      }
+    }
+    myMunicipText.innerHTML = textToDisplay;
 
   };
 
@@ -376,8 +394,10 @@
 
   function restOfCode(err, results) {
     //Load tsv data
-    selectedMunicip = results;
+    selectedMunicip = results[0];
+    textSelectedMunicip = results[1];
 
+    // console.log(textSelectedMunicip[0].Text);
 
     //USE D3 TO LOAD VECTORS AS SVG ELEMENTS
     var svg = d3.select(map.getPanes().overlayPane).append("svg"),
@@ -543,7 +563,7 @@
         if (isDragging) {
         } else {
           //It's a new click get rid of our console div
-          document.getElementById("console").style.visibility = 'hidden';
+          document.getElementById("console").style.display="none";
           // var info = document.getElementById("image");
           // info.innerHTML='<br>';
           // info.innerHTML="<img src=webmap/img/Image_"+selectedMunicip[i].ID+".png>";

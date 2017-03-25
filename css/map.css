@@ -27,7 +27,8 @@ p{
   /*top: 230px;*/
   height: auto;
   /*width: 20%;*/
-  visibility: hidden;
+  /*visibility: hidden;*/
+  display:none;
   /*float: right;*/
   background-color: rgba(0,0,0,0.5);
   color: white;
@@ -103,6 +104,11 @@ p{
   position: relative;
 }
 #infoBars p {
+  font-size: .9em;
+  font-weight: 100;
+  margin-bottom: 12px;
+}
+#municipText{
   font-size: .9em;
   font-weight: 100;
   margin-bottom: 12px;
