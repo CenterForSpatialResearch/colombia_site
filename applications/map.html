@@ -698,7 +698,6 @@
 
       //Adding an event listening for scrolling, only allow map to scroll when pointer is not over the dropdown div
       document.getElementById('map').addEventListener("wheel", function() {
-        console.log('scroll!');
         if(boolOverButton){
           map.scrollWheelZoom.disable();
         } else {
