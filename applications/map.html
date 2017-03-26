@@ -55,10 +55,9 @@
   </nav>
 
   <div id="map">
+
     <div id="masthead">
       <h1>COLOMBIA'S REPORTED INTERNALLY DISPLACED PEOPLE: 1985 - 2015</h1>
-      <!-- <p style="text-align:center;">1985 - 2015</p> -->
-      <!-- BUG PUT ORIGIN ON THE SAME LINE -->
       <div id="barLegend" style="height:2px;">
         <div style="width:50%; text-align:left; float:left;"><p>Origin</p></div>
         <div style="width:50%; text-align:right; float:left;"><p>Destination</p></div>
@@ -99,27 +98,32 @@
           </ul>
         </div>
       </div>
-      <!--       <div id="weightKey">Municipality of Origin --- Municipality of Destination</div></li>
-      <p>Forced Displacement routes</p> -->
-      <p>Click on a municipality for more information</p>
-      <!-- </div> -->
-    <div id="console">
-      <div id="image"></div>
-      <div id="title"></div>
-      <div id ="infoBars">
-        <div id="population" class="bar"></div>
-        <p id="ptext"></p>
-        <div id="desplazados" class="bar"></div>
-        <p id = "dtext"></p>
-        <div id ="refugiados" class="bar"></div>
-        <p id = "rtext"></p>
-        <div id ="ipc" class = "bar"></div>
-        <p id="itext"></p>
+      <p>Select a municipality from the dropdown or click one on the map</p>
+      <div id="console">
+        <div id="image"></div>
+        <div id="title"></div>
+        <div id ="infoBars">
+          <div id="population" class="bar"></div>
+          <p id="ptext"></p>
+          <div id="desplazados" class="bar"></div>
+          <p id = "dtext"></p>
+          <div id ="refugiados" class="bar"></div>
+          <p id = "rtext"></p>
+          <div id ="ipc" class = "bar"></div>
+          <p id="itext"></p>
+        </div>
+        <div id="municipText"><p></p></div>
       </div>
-      <div id="municipText"><p></p></div>
+      <div class="button" id="showPathsIn">Paths In</div>
+      <div class="button" id="showPathsOut">Paths Out</div>
     </div>
-    <div class="button" id="showPathsIn">Paths In</div>
-    <div class="button" id="showPathsOut">Paths Out</div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Select a Municipality</button>
+      <div class="dropdown-content" id="myddown-cont">
+      </div>
+    </div>
+
   </div>
   <svg>
     <defs>
@@ -241,6 +245,13 @@
   if (query.noscroll) {
     map.scrollWheelZoom.disable();
   }
+
+  // document.getElementsByClassName("dropdown-content").onmouseover = function(){boolOverButton = true;};
+  // document.getElementsByClassName("dropdown-content").onmouseout = function(){boolOverButton = false;};
+  // if(boolOverButton){
+  //   map.scrollWheelZoom.disable();
+  // }
+  map.scrollWheelZoom.disable();
 
   window.layer = layer;
   var scene = layer.scene;
@@ -472,11 +483,9 @@
   };
 
   function restOfCode(err, results) {
-    //Load tsv data
+    //Assign loaded tsv data to variables
     selectedMunicip = results[0];
     textSelectedMunicip = results[1];
-
-    // console.log(textSelectedMunicip[0].Text);
 
     //USE D3 TO LOAD VECTORS AS SVG ELEMENTS
     var svg = d3.select(map.getPanes().overlayPane).append("svg"),
@@ -608,7 +617,9 @@
       }
     }
 
-    //add icons for all municipalities in our dataset, the tsv
+
+    var dropDownContent = document.getElementById('myddown-cont');
+    //add icons for all municipalities in our dataset, the tsv, and add those municiplaities to our dropdown list
     for (j=0; j< selectedMunicip.length; j++)
     {
       var marker = L.marker([selectedMunicip[j].LATITUDE, selectedMunicip[j].LONGITUDE],
@@ -620,6 +631,13 @@
       var icon = document.getElementsByClassName("leaflet-marker-icon")[j];
       icon.className+=" "+selectedMunicip[j].ID;
       icon.setAttribute("onclick", 'markerClick(this.classList.item(3))');
+
+      //add the municipalities to the dropdown
+      var pTag = document.createElement('p');
+      pTag.setAttribute('myid', selectedMunicip[j].ID);
+      pTag.setAttribute('onclick', 'markerClick(this.getAttribute("myId"))');
+      pTag.innerHTML = selectedMunicip[j].NAME;
+      dropDownContent.append(pTag);
     };
 
     //If buttons are pressed only show relevant paths
@@ -633,17 +651,6 @@
     pathsInButton.onmouseout = function(){boolOverButton = false;};
     pathsOutButton.onmouseover = function(){boolOverButton = true;};
     pathsOutButton.onmouseout = function(){boolOverButton = false;};
-
-    // //hide buttons and keep inactive if console not displayed aka if a city is not actively clicked
-    // if (document.getElementById("console").style.display === "none"){
-    //   console.log("should be hidden now");
-    //   //console hidden so hide our buttons
-    //   pathsInButton.style.display='none';
-    //   pathsOutButton.style.display='none';
-    // } else {
-    //   pathsInButton.style.display='block';
-    //   pathsOutButton.style.display='block';
-    // }
 
 
     //reset lines when the map terrain is clicked but not when mouse terrain is dragged
