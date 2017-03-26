@@ -118,7 +118,7 @@
       <div class="button" id="showPathsOut">Paths Out</div>
     </div>
 
-    <div class="dropdown">
+    <div class="dropdown" id='dropDownParent'>
       <button class="dropbtn">Select a Municipality</button>
       <div class="dropdown-content" id="myddown-cont">
       </div>
@@ -245,13 +245,6 @@
   if (query.noscroll) {
     map.scrollWheelZoom.disable();
   }
-
-  // document.getElementsByClassName("dropdown-content").onmouseover = function(){boolOverButton = true;};
-  // document.getElementsByClassName("dropdown-content").onmouseout = function(){boolOverButton = false;};
-  // if(boolOverButton){
-  //   map.scrollWheelZoom.disable();
-  // }
-  map.scrollWheelZoom.disable();
 
   window.layer = layer;
   var scene = layer.scene;
@@ -640,6 +633,10 @@
       dropDownContent.append(pTag);
     };
 
+    //Record if we are over 
+    document.getElementById('dropDownParent').setAttribute('onmouseover', 'boolOverButton = true;');
+    document.getElementById('dropDownParent').setAttribute('onmouseout', 'boolOverButton= false');
+
     //If buttons are pressed only show relevant paths
     var pathsInButton = document.getElementById("showPathsIn");
     var pathsOutButton = document.getElementById("showPathsOut");
@@ -697,6 +694,16 @@
         }
         isDragging = false;
         startingPos = [];
+      });
+
+      //Adding an event listening for scrolling, only allow map to scroll when pointer is not over the dropdown div
+      document.getElementById('map').addEventListener("wheel", function() {
+        console.log('scroll!');
+        if(boolOverButton){
+          map.scrollWheelZoom.disable();
+        } else {
+          map.scrollWheelZoom.enable();
+        }
       });
   };
 
