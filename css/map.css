@@ -65,7 +65,7 @@ p{
   background-color: rgba(0,0,0,0.9);
   float: right;
   padding: 20px;
-  padding-bottom: 0px;
+  padding-bottom: 5px;
   position: absolute;
   color: white;
   top: 0px;
@@ -112,6 +112,28 @@ p{
   font-size: .9em;
   font-weight: 100;
   margin-bottom: 12px;
+}
+.button{
+  background-color: #333333;
+  position: absolute;
+  width: 60px;
+  height: 16px;
+  z-index: 100;
+  font-size: 0.8em;
+  right:350px;
+  top:15px;
+  /*text-align: center;*/
+  cursor:pointer;
+  display:none;
+  font-family: 'Roboto', helvetica, sans-serif;
+  font-weight: 100;
+  font-size: .8em;
+}
+#showPathsIn{
+  top: 70px;
+}
+#showPathsOut{
+  top: 95px;
 }
 .bar{
   margin-bottom: 8px;

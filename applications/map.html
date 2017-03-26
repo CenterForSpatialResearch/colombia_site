@@ -99,10 +99,10 @@
           </ul>
         </div>
       </div>
-<!--       <div id="weightKey">Municipality of Origin --- Municipality of Destination</div></li>
+      <!--       <div id="weightKey">Municipality of Origin --- Municipality of Destination</div></li>
       <p>Forced Displacement routes</p> -->
       <p>Click on a municipality for more information</p>
-    <!-- </div> -->
+      <!-- </div> -->
     <div id="console">
       <div id="image"></div>
       <div id="title"></div>
@@ -116,8 +116,10 @@
         <div id ="ipc" class = "bar"></div>
         <p id="itext"></p>
       </div>
-      <div id="municipText"><p>This is my practice text!!!</p></div>
+      <div id="municipText"><p></p></div>
     </div>
+    <div class="button" id="showPathsIn">Paths In</div>
+    <div class="button" id="showPathsOut">Paths Out</div>
   </div>
   <svg>
     <defs>
@@ -263,6 +265,13 @@
   lookup[csv[i][3]]=csv[i][0];
   }
 
+  //Button variables
+  var boolOverButton = false;
+  var buttonBaseColor = '#333333'
+  var buttonHighColor = '#ff7111'
+  var buttonLowColor = '#333333'
+
+  //Municipality data
   var selectedMunicip;
   var textSelectedMunicip;
   var myFileNames = ['data/SelectedMunicipalities.tsv', 'data/TextSelectedMunicipalities.tsv']
@@ -304,6 +313,71 @@
     }
     return matchingElements;
   }
+
+  function showOnlyPathsIn(city){
+    //Function to Display only those paths that end in our city
+    var paths = document.getElementsByTagName('path');
+    [].forEach.call(paths, function(test){
+      test.setAttribute("hide","1");
+    });
+    //grab the paths ending in our city and grab the image associated with our city
+    var destinationPathsAndImage = Array.prototype.slice.call(document.getElementsByClassName(city));
+    //grab all of the paths originatin in our clicked city
+    // var originPaths = getAllElementsWithAttribute('originCode', city);
+    //combine all our desired html elements into one array
+    var icon = Array.prototype.concat(destinationPathsAndImage);
+
+    // lastClicked=city;
+    [].forEach.call(icon, function(test){
+      test.setAttribute("hide","0");
+      test.setAttribute("display", 'block');
+    });
+
+    //remove irrelevant paths
+    var paths = document.getElementsByTagName('path');
+    [].forEach.call(paths, function(test){
+      if(test.getAttribute("hide")>0){
+        test.setAttribute("display",'none');
+      };
+    });
+
+    //update button color
+    document.getElementById("showPathsIn").style.background = buttonHighColor;
+    document.getElementById("showPathsOut").style.background = buttonLowColor;
+
+  };
+
+  function showOnlyPathsOut(city){
+    //Function to Display only those paths that start in our city, I think it has something to do with the array
+    var paths = document.getElementsByTagName('path');
+    [].forEach.call(paths, function(test){
+      test.setAttribute("hide","1");
+    });
+    //grab the paths ending in our city and grab the image associated with our city
+    // var destinationPathsAndImage = Array.prototype.slice.call(document.getElementsByClassName(city));
+    //grab all of the paths originatin in our clicked city
+    var originPaths = getAllElementsWithAttribute('originCode', String(city));
+    //combine all our desired html elements into one array
+    var icon = Array.prototype.concat(originPaths);
+
+    // lastClicked=city;
+    [].forEach.call(icon, function(test){
+      test.setAttribute("hide","0");
+      test.setAttribute("display", 'block');
+    });
+
+    //remove irrelevant paths
+    var paths = document.getElementsByTagName('path');
+    [].forEach.call(paths, function(test){
+      if(test.getAttribute("hide")>0){
+        test.setAttribute("display",'none');
+      };
+    });
+
+    //update button color
+    document.getElementById("showPathsOut").style.background = buttonHighColor;
+    document.getElementById("showPathsIn").style.background = buttonLowColor;
+  };
 
   //on marker click, open data tray
   //save the ID of the last clicked city
@@ -365,6 +439,11 @@
     // mapDiv.style.visibility="visible";
     mapDiv.style.display="block"
     document.getElementById("infoBars").style.display='block';
+    //display the buttons and refresh button color
+    document.getElementById("showPathsIn").style.background = buttonBaseColor;
+    document.getElementById("showPathsOut").style.background = buttonBaseColor;
+    document.getElementById("showPathsIn").style.display='block';
+    document.getElementById("showPathsOut").style.display='block';
 
     $("#population").animate({'width':''+100*thisMunicipPop/maxBarLen+"%"});
     document.getElementById("ptext").innerHTML=""+ thisMunicipPop.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Population (2005)";
@@ -529,7 +608,6 @@
       }
     }
 
-
     //add icons for all municipalities in our dataset, the tsv
     for (j=0; j< selectedMunicip.length; j++)
     {
@@ -544,6 +622,28 @@
       icon.setAttribute("onclick", 'markerClick(this.classList.item(3))');
     };
 
+    //If buttons are pressed only show relevant paths
+    var pathsInButton = document.getElementById("showPathsIn");
+    var pathsOutButton = document.getElementById("showPathsOut");
+
+    pathsInButton.setAttribute("onclick", 'showOnlyPathsIn(lastClicked)');
+    pathsOutButton.setAttribute("onclick", 'showOnlyPathsOut(lastClicked)');
+
+    pathsInButton.onmouseover = function(){boolOverButton = true;};
+    pathsInButton.onmouseout = function(){boolOverButton = false;};
+    pathsOutButton.onmouseover = function(){boolOverButton = true;};
+    pathsOutButton.onmouseout = function(){boolOverButton = false;};
+
+    // //hide buttons and keep inactive if console not displayed aka if a city is not actively clicked
+    // if (document.getElementById("console").style.display === "none"){
+    //   console.log("should be hidden now");
+    //   //console hidden so hide our buttons
+    //   pathsInButton.style.display='none';
+    //   pathsOutButton.style.display='none';
+    // } else {
+    //   pathsInButton.style.display='block';
+    //   pathsOutButton.style.display='block';
+    // }
 
 
     //reset lines when the map terrain is clicked but not when mouse terrain is dragged
@@ -560,27 +660,32 @@
         }
       })
       .mouseup( function (evt) {
-        if (isDragging) {
-        } else {
-          //It's a new click get rid of our console div
-          document.getElementById("console").style.display="none";
-          // var info = document.getElementById("image");
-          // info.innerHTML='<br>';
-          // info.innerHTML="<img src=webmap/img/Image_"+selectedMunicip[i].ID+".png>";
-          // info.style.display='none';
-          document.getElementById("image").style.display='none';
-          document.getElementById("infoBars").style.display='none';
+        if (!boolOverButton){
+          if (isDragging) {
+          } else {
+            //It's a new click get rid of our console div
+            document.getElementById("console").style.display="none";
+            // var info = document.getElementById("image");
+            // info.innerHTML='<br>';
+            // info.innerHTML="<img src=webmap/img/Image_"+selectedMunicip[i].ID+".png>";
+            // info.style.display='none';
+            document.getElementById("image").style.display='none';
+            document.getElementById("infoBars").style.display='none';
 
-          if (evt.target.classList.item(3)!=lastClicked){
-            var mapDiv = document.getElementById("console");
-            var paths = document.getElementsByTagName('path');
-            [].forEach.call(paths, function(test){
-              test.setAttribute("display", 'block');
-              test.setAttribute("hide","1");
-            });
-            setTimeout(function(){
-            }, 1000);
-            // $(mapDiv).fadeTo(1000,0);    //fade bug
+            document.getElementById("showPathsIn").style.display='none';
+            document.getElementById("showPathsOut").style.display='none';
+
+            if (evt.target.classList.item(3)!=lastClicked){
+              var mapDiv = document.getElementById("console");
+              var paths = document.getElementsByTagName('path');
+              [].forEach.call(paths, function(test){
+                test.setAttribute("display", 'block');
+                test.setAttribute("hide","1");
+              });
+              setTimeout(function(){
+              }, 1000);
+              // $(mapDiv).fadeTo(1000,0);    //fade bug
+            }
           }
         }
         isDragging = false;
