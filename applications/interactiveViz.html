@@ -361,11 +361,20 @@
 
 		//Add our drop down content to the menu
 	    var dropDownContent = document.getElementById('myddown-cont');
-	    //add icons for all municipalities in our dataset, the tsv, and add those municiplaities to our dropdown list
+
+		//Add the "All Municpality" to our dropdown before we add all the municipalities
+		var pTag = document.createElement('p');
+	    pTag.setAttribute('myid', 'none');
+	    pTag.setAttribute('myname', 'all');
+      	pTag.setAttribute('onclick', 'dropDownClick(this.getAttribute("myId"), "all")');
+	  	pTag.innerHTML = 'All Municipalities';
+      	dropDownContent.append(pTag);
+
+	    //add those municiplaities to our dropdown list
 	    for (j=0; j< selectedMunicipalities.length; j++)
 	    {
 	      //add the municipalities to the dropdown
-	      var pTag = document.createElement('p');
+	      pTag = document.createElement('p');
 	      pTag.setAttribute('myid', selectedMunicipalities[j].ID);
 	      pTag.setAttribute('myname', selectedMunicipalities[j].Municipality);
 	      pTag.setAttribute('onclick', 'dropDownClick(this.getAttribute("myId"), this.getAttribute("myname"))');
@@ -560,7 +569,6 @@
 				var thisDataPt = datasetVictims[i];
 				geometry.colors[i] = colorEventDate(thisDataPt);
 			}
-			// UPDATE UI HERE
 			updateUiColorEventDate();
 
 		});
@@ -572,7 +580,6 @@
 				var thisDataPt = datasetVictims[i];
 				geometry.colors[i] = colorReportDate(thisDataPt);
 			}
-			// UPDATE UI HERE
 			updateUiColorReportDate();
 		});
 	}
@@ -632,9 +639,6 @@
 			size: rectSize,
 			sizeAttenuation: false,
 			vertexColors: THREE.VertexColors,
-			// transparent: true,
-			// opacity: 1,
-			// alphaTest: 0.1
 		});
 		// We now bind the geometry to the material to create a point that can be visualized, and then add those points to the scene
 		particles = new THREE.Points(geometry, material);
@@ -661,7 +665,7 @@
 		// Event listeners that listen for when the mouse is moved or when the window is resized
 		window.addEventListener( 'resize', onWindowResize, false);
 		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-		document.addEventListener( 'mousedown', onDocumentMouseDown);
+		// document.addEventListener( 'mousedown', onDocumentMouseDown);
 		// For user friendliness, we identify how we are sorting and coloring to begin by showing the appropriate legend and color
 		updateUiSortEventDate();
 		updateUiColorHecho();
@@ -673,15 +677,10 @@
 
 	function onWindowResize( event ) {
 		//Variables to update whenever the browser window is resized
-		// console.log("Window resized");
 		windowHalfX = window.innerWidth / 2;
 		windowHalfY = window.innerHeight / 2;
 		camera.aspect = window.innerWidth / window.innerHeight;
 		aspectRatio = window.innerWidth / window.innerHeight;
-	// 	camera.left   = - camViewSize * aspectRatio / 2;
-	// 	camera.right  =   camViewSize * aspectRatio / 2;
-	// 	camera.top    =   camViewSize / 2 + vertPadding;
-	// 	camera.bottom = - camViewSize / 2 + vertPadding;
 		camera.updateProjectionMatrix();
 		// myHeight = viewSize;
 		myWidth = viewSize*aspectRatio;
@@ -693,28 +692,27 @@
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 	}
-	function onDocumentMouseDown( event) {
-		//If mousedown while the mouse is not on the dropdown menu, reset our highlightbool and id
-		if (!boolMouseOnDropDown){
-			//if the mouse is not on the dropdown menu...
-			// console.log("you clicked while not on dropdown");
-			if(boolHighlight){
-				// if there are values that are currently being hight
-				boolHighlight = false;
-				highlightId = '';
-				//update the colors now that boolHighlight is false to return to base colors
-				updateAllDataColors(currentColor);
-				//MIKE the reset here is what is causing our color flash, maybe it's ok. We could get a mouseover flag to tell when mouse is over color buttons,
-				//we would then not do this updateAllDataCOlors line here if mouseover color button since we are just going to be changing it in a second
+	// function onDocumentMouseDown( event) {
+	// 	//If mousedown while the mouse is not on the dropdown menu, reset our highlightbool and id
+	// 	if (!boolMouseOnDropDown){
+	// 		//if the mouse is not on the dropdown menu...
+	// 		if(boolHighlight){
+	// 			// if there are values that are currently being hight
+	// 			boolHighlight = false;
+	// 			highlightId = '';
+	// 			//update the colors now that boolHighlight is false to return to base colors
+	// 			updateAllDataColors(currentColor);
+	// 			//MIKE the reset here is what is causing our color flash, maybe it's ok. We could get a mouseover flag to tell when mouse is over color buttons,
+	// 			//we would then not do this updateAllDataCOlors line here if mouseover color button since we are just going to be changing it in a second
 
-				//Update the current municipality text to be blank
-				document.getElementById('currentMunicip').innerHTML = "<p></p>" 
-			}
+	// 			//Update the current municipality text to be blank
+	// 			document.getElementById('currentMunicip').innerHTML = "<p></p>" 
+	// 		}
 
-			// boolHighlight = false;
-			// highlightId = '';
-		}
-	}
+	// 		// boolHighlight = false;
+	// 		// highlightId = '';
+	// 	}
+	// }
 
 	// #############################################################################
 	// ############################ COLOR FUNCTIONS ###############################
@@ -738,7 +736,6 @@
 		var _color2 = "#00FFD0";
 		var _color3 = "#459FFF";
 		var _color4 = "#595959";
-
 		//If we are highlighting data points, and if this data point is associated with the chosen municipality, highlight it
 		if(boolHighlight){
 			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
@@ -748,7 +745,6 @@
 				_color4 = shadeColor2(_color4, floatHighlightPerc);
 			}
 		}
-
 		_color1 = new THREE.Color(_color1);
 		_color2 = new THREE.Color(_color2);
 		_color3 = new THREE.Color(_color3);
@@ -774,7 +770,6 @@
 		var _color3 ="#2EC0FF";
 		var _color4 ="#FF9E2E";
 		var _color5 ="#595959";
-
 		//If we are highlighting data points, and if this data point is associated with the chosen municipality, highlight it
 		if(boolHighlight){
 			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
@@ -785,7 +780,6 @@
 				_color5 = shadeColor2(_color5, floatHighlightPerc);
 			}
 		}
-
 		_color1 = new THREE.Color(_color1);
 		_color2 = new THREE.Color(_color2);
 		_color3 = new THREE.Color(_color3);
@@ -813,7 +807,6 @@
 		var _color1 ='#40FF9F';
 		var _color2 ='#FFBC40';
 		var _color4 ='#BC40FF';
-
 		//If we are highlighting data points, and if this data point is associated with the chosen municipality, highlight it
 		if(boolHighlight){
 			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
@@ -822,7 +815,6 @@
 				_color4 = shadeColor2(_color4, floatHighlightPerc);
 			}
 		}
-
 		_color1 = new THREE.Color(_color1);
 		_color2 = new THREE.Color(_color2);
 		_color4 = new THREE.Color(_color4);
@@ -843,7 +835,6 @@
 		var _color2 = "#FFBC40";
 		var _color3 = "#BC40FF";
 		var _color4 = "#595959";
-
 		//If we are highlighting data points, and if this data point is associated with the chosen municipality, highlight it
 		if(boolHighlight){
 			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
@@ -853,7 +844,6 @@
 				_color4 = shadeColor2(_color4, floatHighlightPerc);
 			}
 		}
-
 		_color1 = new THREE.Color(_color1);
 		_color2 = new THREE.Color(_color2);
 		_color3 = new THREE.Color(_color3);
@@ -1046,7 +1036,6 @@
 				.transition()
 				.duration(100)
 				.style("left", divXLoc + "px")
-				//eventually should scale the x,y so it is the same size as the space where the pixels are displayed
 				.style("top", divYLoc + "px");
 				d3.select("#dateText")
 				.text(tooltipTextList[0]);
@@ -1536,13 +1525,19 @@
 	}
 	//On dropdown click, highlight the relevant datapoints
 	function dropDownClick(thisId, thisName){
-		boolHighlight = true;
-		highlightId = thisId;
-		// console.log("You clicked this id: " + String(thisId));
+		if(thisName === "all"){
+			boolHighlight = false;
+			highlightId = '';
+			//Update the current municipality text
+			document.getElementById('currentMunicip').innerHTML = "<p></p>" ;
+		}else{
+			boolHighlight = true;
+			highlightId = thisId;
+			//Update the current municipality text with this name
+			document.getElementById('currentMunicip').innerHTML = "<p>"+thisName+"</p>" ;
+		}
+		//Now that we're highlihgting correctly, update the colors
 		updateAllDataColors(currentColor);
-
-		//Update the current municipality text
-		document.getElementById('currentMunicip').innerHTML = "<p>"+thisName+"</p>" ;
 	}
 	function updateAllDataColors(_currentColorString){
 		var _dataSetLen = datasetVictims.length;
