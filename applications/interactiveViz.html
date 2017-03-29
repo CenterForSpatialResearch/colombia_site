@@ -155,6 +155,7 @@
       <div class="dropdown-content" id="myddown-cont">
       </div>
     </div>
+    <div id="currentMunicip"></div>
 
 	<div id="tooltip" class="hidden">
 		<p><span id="dateText">100</span></p>
@@ -366,7 +367,8 @@
 	      //add the municipalities to the dropdown
 	      var pTag = document.createElement('p');
 	      pTag.setAttribute('myid', selectedMunicipalities[j].ID);
-	      pTag.setAttribute('onclick', 'dropDownClick(this.getAttribute("myId"))');
+	      pTag.setAttribute('myname', selectedMunicipalities[j].Municipality);
+	      pTag.setAttribute('onclick', 'dropDownClick(this.getAttribute("myId"), this.getAttribute("myname"))');
 	      pTag.innerHTML = selectedMunicipalities[j].Municipality;
 	      dropDownContent.append(pTag);
 	    };
@@ -704,6 +706,9 @@
 				updateAllDataColors(currentColor);
 				//MIKE the reset here is what is causing our color flash, maybe it's ok. We could get a mouseover flag to tell when mouse is over color buttons,
 				//we would then not do this updateAllDataCOlors line here if mouseover color button since we are just going to be changing it in a second
+
+				//Update the current municipality text to be blank
+				document.getElementById('currentMunicip').innerHTML = "<p></p>" 
 			}
 
 			// boolHighlight = false;
@@ -1530,12 +1535,14 @@
 		.style("background-color", buttonColorOn);
 	}
 	//On dropdown click, highlight the relevant datapoints
-	function dropDownClick(thisId){
+	function dropDownClick(thisId, thisName){
 		boolHighlight = true;
 		highlightId = thisId;
 		// console.log("You clicked this id: " + String(thisId));
-
 		updateAllDataColors(currentColor);
+
+		//Update the current municipality text
+		document.getElementById('currentMunicip').innerHTML = "<p>"+thisName+"</p>" ;
 	}
 	function updateAllDataColors(_currentColorString){
 		var _dataSetLen = datasetVictims.length;
