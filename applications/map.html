@@ -114,6 +114,7 @@
         </div>
         <div id="municipText"><p></p></div>
       </div>
+      <div class="button" id="showPathsAll">All Paths</div>
       <div class="button" id="showPathsIn">Paths In</div>
       <div class="button" id="showPathsOut">Paths Out</div>
     </div>
@@ -318,6 +319,39 @@
     return matchingElements;
   }
 
+  function showAllPaths(city){
+    //Function to Display all the paths that end in our city
+    var paths = document.getElementsByTagName('path');
+    [].forEach.call(paths, function(test){
+      test.setAttribute("hide","1");
+    });
+    //grab the paths ending in our city and grab the image associated with our city
+    var destinationPathsAndImage = Array.prototype.slice.call(document.getElementsByClassName(city));
+    //grab all of the paths originatin in our clicked city
+    var originPaths = getAllElementsWithAttribute('originCode', city);
+    //combine all our desired html elements into one array
+    var icon = Array.prototype.concat(originPaths, destinationPathsAndImage);
+
+    // lastClicked=city;
+    [].forEach.call(icon, function(test){
+      test.setAttribute("hide","0");
+      test.setAttribute("display", 'block');
+    });
+
+    //remove irrelevant paths
+    var paths = document.getElementsByTagName('path');
+    [].forEach.call(paths, function(test){
+      if(test.getAttribute("hide")>0){
+        test.setAttribute("display",'none');
+      };
+    });
+
+    //update button color
+    document.getElementById("showPathsAll").style.background = buttonHighColor;
+    document.getElementById("showPathsIn").style.background = buttonLowColor;
+    document.getElementById("showPathsOut").style.background = buttonLowColor;
+  }
+
   function showOnlyPathsIn(city){
     //Function to Display only those paths that end in our city
     var paths = document.getElementsByTagName('path');
@@ -348,6 +382,7 @@
     //update button color
     document.getElementById("showPathsIn").style.background = buttonHighColor;
     document.getElementById("showPathsOut").style.background = buttonLowColor;
+    document.getElementById("showPathsAll").style.background = buttonLowColor;
 
   };
 
@@ -381,6 +416,7 @@
     //update button color
     document.getElementById("showPathsOut").style.background = buttonHighColor;
     document.getElementById("showPathsIn").style.background = buttonLowColor;
+    document.getElementById("showPathsAll").style.background = buttonLowColor;
   };
 
   //on marker click, open data tray
@@ -446,8 +482,10 @@
     //display the buttons and refresh button color
     document.getElementById("showPathsIn").style.background = buttonBaseColor;
     document.getElementById("showPathsOut").style.background = buttonBaseColor;
+    document.getElementById("showPathsAll").style.background = buttonHighColor;
     document.getElementById("showPathsIn").style.display='block';
     document.getElementById("showPathsOut").style.display='block';
+    document.getElementById("showPathsAll").style.display='block';
 
     $("#population").animate({'width':''+100*thisMunicipPop/maxBarLen+"%"});
     document.getElementById("ptext").innerHTML=""+ thisMunicipPop.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Population (2005)";
@@ -640,14 +678,18 @@
     //If buttons are pressed only show relevant paths
     var pathsInButton = document.getElementById("showPathsIn");
     var pathsOutButton = document.getElementById("showPathsOut");
+    var pathsAllButton = document.getElementById("showPathsAll");
 
     pathsInButton.setAttribute("onclick", 'showOnlyPathsIn(lastClicked)');
     pathsOutButton.setAttribute("onclick", 'showOnlyPathsOut(lastClicked)');
+    pathsAllButton.setAttribute("onclick", 'showAllPaths(lastClicked)');
 
     pathsInButton.onmouseover = function(){boolOverButton = true;};
     pathsInButton.onmouseout = function(){boolOverButton = false;};
     pathsOutButton.onmouseover = function(){boolOverButton = true;};
     pathsOutButton.onmouseout = function(){boolOverButton = false;};
+    pathsAllButton.onmouseover = function(){boolOverButton = true;};
+    pathsAllButton.onmouseout = function(){boolOverButton = false;};
 
 
     //reset lines when the map terrain is clicked but not when mouse terrain is dragged
@@ -678,6 +720,7 @@
 
             document.getElementById("showPathsIn").style.display='none';
             document.getElementById("showPathsOut").style.display='none';
+            document.getElementById("showPathsAll").style.display='none';
 
             if (evt.target.classList.item(3)!=lastClicked){
               var mapDiv = document.getElementById("console");

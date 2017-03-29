@@ -129,11 +129,14 @@ p{
   font-weight: 100;
   font-size: .8em;
 }
-#showPathsIn{
+#showPathsAll{
   top: 70px;
 }
-#showPathsOut{
+#showPathsIn{
   top: 95px;
+}
+#showPathsOut{
+  top: 120px;
 }
 .bar{
   margin-bottom: 8px;
