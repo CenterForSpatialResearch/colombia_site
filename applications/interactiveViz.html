@@ -999,69 +999,71 @@
 		worldX = parseInt(map_range(mouse.x, -1, 1, 0, windowHalfX*2));
 		worldY = parseInt(map_range(mouse.y, -1, 1, windowHalfY*2, 0));
 		//Calculate raycaster intersections (mouseover events) when we are not actively moving particles on screen
-		if (raycastOn) {
-			// Tell three JS where we are drawing our ray from and based on what point
+		if(!boolMouseOnDropDown){
+			if (raycastOn) {
+				// Tell three JS where we are drawing our ray from and based on what point
 
-			// var raycastMouseX = map_range(worldX, 0, 1427, -0.9825, 0.7775000000000001);
-			var raycastMouseX = map_range(worldX, 0 ,originalWidth, -1, 1);
-			var raycastMouseY = map_range(worldY, 0, myHeight, 1, -1);
-			var raycastMouse = new THREE.Vector2(raycastMouseX, raycastMouseY);
+				// var raycastMouseX = map_range(worldX, 0, 1427, -0.9825, 0.7775000000000001);
+				var raycastMouseX = map_range(worldX, 0 ,originalWidth, -1, 1);
+				var raycastMouseY = map_range(worldY, 0, myHeight, 1, -1);
+				var raycastMouse = new THREE.Vector2(raycastMouseX, raycastMouseY);
 
-			raycaster.setFromCamera( raycastMouse, camera );
-			// Calculate what paricles if any the raycaster intersects
-			var intersections = raycaster.intersectObject(particles);
-			intersection = (intersections.length) > 0 ? intersections[0] : null;
-			if(intersection != null) {
-				// In the event that we DO intersect a particle, intersection is not null and we proceed
-				// Find intersection point so we know where to display our div
-				var intersectPosition = intersection.point;
-				var divXLoc = worldX;
-				if (divXLoc > windowHalfX) {
-					divXLoc = divXLoc - 250;
+				raycaster.setFromCamera( raycastMouse, camera );
+				// Calculate what paricles if any the raycaster intersects
+				var intersections = raycaster.intersectObject(particles);
+				intersection = (intersections.length) > 0 ? intersections[0] : null;
+				if(intersection != null) {
+					// In the event that we DO intersect a particle, intersection is not null and we proceed
+					// Find intersection point so we know where to display our div
+					var intersectPosition = intersection.point;
+					var divXLoc = worldX;
+					if (divXLoc > windowHalfX) {
+						divXLoc = divXLoc - 250;
+					} else {
+						divXLoc = divXLoc + 50;
+					}
+					var divYLoc = worldY;
+					if (divYLoc > windowHalfY) {
+						divYLoc = divYLoc - 100;
+					}
+					//Move our sphere to the intersected poisition
+					sphere.position.copy(intersectPosition);
+					sphere.visible = true;
+					sphere.scale.set(2, 2, 2);
+					//Get this data points parameters as text to display in the tool tip
+					tooltipTextList = getTooltipText(datasetVictims[intersection.index])
+					// Tell d3 where to display our tooltip
+					d3.select("#tooltip")
+					.transition()
+					.duration(100)
+					.style("left", divXLoc + "px")
+					.style("top", divYLoc + "px");
+					d3.select("#dateText")
+					.text(tooltipTextList[0]);
+					d3.select("#tooltip")
+					.select("#eventText")
+					.text(tooltipTextList[1]);
+					d3.select("#tooltip")
+					.select("#actorText")
+					.text(tooltipTextList[2]);
+					d3.select("#tooltip")
+					.select("#genderText")
+					.text(tooltipTextList[3]);
+					d3.select("#tooltip")
+					.select("#ethnicityText")
+					.text(tooltipTextList[4]);
+					//Show the tooltip
+					d3.select("#tooltip").classed("hidden", false);
 				} else {
-					divXLoc = divXLoc + 50;
+					//Hide our sphere cursor
+					sphere.visible = false;
+					//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
 				}
-				var divYLoc = worldY;
-				if (divYLoc > windowHalfY) {
-					divYLoc = divYLoc - 100;
-				}
-				//Move our sphere to the intersected poisition
-				sphere.position.copy(intersectPosition);
-				sphere.visible = true;
-				sphere.scale.set(2, 2, 2);
-				//Get this data points parameters as text to display in the tool tip
-				tooltipTextList = getTooltipText(datasetVictims[intersection.index])
-				// Tell d3 where to display our tooltip
-				d3.select("#tooltip")
-				.transition()
-				.duration(100)
-				.style("left", divXLoc + "px")
-				.style("top", divYLoc + "px");
-				d3.select("#dateText")
-				.text(tooltipTextList[0]);
-				d3.select("#tooltip")
-				.select("#eventText")
-				.text(tooltipTextList[1]);
-				d3.select("#tooltip")
-				.select("#actorText")
-				.text(tooltipTextList[2]);
-				d3.select("#tooltip")
-				.select("#genderText")
-				.text(tooltipTextList[3]);
-				d3.select("#tooltip")
-				.select("#ethnicityText")
-				.text(tooltipTextList[4]);
-				//Show the tooltip
-				d3.select("#tooltip").classed("hidden", false);
 			} else {
-				//Hide our sphere cursor
-				sphere.visible = false;
 				//Hide the tooltip
 				d3.select("#tooltip").classed("hidden", true);
 			}
-		} else {
-			//Hide the tooltip
-			d3.select("#tooltip").classed("hidden", true);
 		}
 		// Three JS render this scene with this camera
 		renderer.render( scene, camera );
