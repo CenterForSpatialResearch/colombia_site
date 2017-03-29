@@ -419,6 +419,12 @@
     document.getElementById("showPathsAll").style.background = buttonLowColor;
   };
 
+  function dropDownClick(cityId){
+    //On a click from the dropdown menu, click the city marker and pan to it
+    markerClick(cityId);
+    panToThisCity(cityId);
+  }
+
   //on marker click, open data tray
   //save the ID of the last clicked city
   var lastClicked=0;
@@ -508,6 +514,22 @@
     myMunicipText.innerHTML = textToDisplay;
 
   };
+
+  function panToThisCity(city) {
+    //Find the cities lat and long and pan to it
+    var _lat, _long;
+    var index = 0;
+    for(i=0;i<selectedMunicip.length;i++){
+      if (city === selectedMunicip[i].ID){
+        index=i;
+        break;
+      }
+    }
+    _lat = selectedMunicip[index].LATITUDE;
+    _long = selectedMunicip[index].LONGITUDE;
+
+    map.panTo(new L.LatLng(_lat, _long), {animate: true, duration: 0.7});
+  }
 
   function getCity(index){
     return selectedMunicip[index];
@@ -666,7 +688,8 @@
       //add the municipalities to the dropdown
       var pTag = document.createElement('p');
       pTag.setAttribute('myid', selectedMunicip[j].ID);
-      pTag.setAttribute('onclick', 'markerClick(this.getAttribute("myId"))');
+      // pTag.setAttribute('onclick', 'markerClick(this.getAttribute("myId"))');
+      pTag.setAttribute('onclick', 'dropDownClick(this.getAttribute("myId"))');
       pTag.innerHTML = selectedMunicip[j].NAME;
       dropDownContent.append(pTag);
     };
