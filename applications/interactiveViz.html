@@ -370,6 +370,9 @@
 	  	pTag.innerHTML = 'All Municipalities';
       	dropDownContent.append(pTag);
 
+      	//sort the selected municipalities for the dropdown menu
+		selectedMunicipalities.sort(function(a,b){return(a.Municipality < b.Municipality ?  -1 : (a.Municipality > b.Municipality ? 1 : 0)); });
+
 	    //add those municiplaities to our dropdown list
 	    for (j=0; j< selectedMunicipalities.length; j++)
 	    {

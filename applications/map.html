@@ -540,6 +540,9 @@
     selectedMunicip = results[0];
     textSelectedMunicip = results[1];
 
+    //sort the tsv data that we display in the dropdown
+    selectedMunicip.sort(function(a,b){return(a.NAME < b.NAME ?  -1 : (a.NAME > b.NAME ? 1 : 0)); });
+
     //USE D3 TO LOAD VECTORS AS SVG ELEMENTS
     var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     //g element groups svg's together (html syntax)
