@@ -42,6 +42,25 @@ a {
 	text-align:center;
 	font-weight: 100;
 }
+ul {
+	list-style-type:none;
+	padding: 0px;
+}
+
+li{
+	display:inline;
+	float: left;
+}
+
+li p{
+	display:inline-block;
+	padding-top:0px;
+	padding-bottom:0px;
+	padding-left:3px;
+	padding-right:15px;
+	text-align: center;
+}
+
 #legends{
 	position: absolute;
 	top:80px;
@@ -51,82 +70,18 @@ a {
 	font-weight: 100;
 	display: inline;
 }
-#legend01{
-	position: absolute;
-	top:6px;
-	left: 0px;
-	width:100px;
-}
-#legend02{
-	position: absolute;
-	top:6px;
-	left: 100px;
-	width:100px;
-}
-#legend03{
-	position: absolute;
-	top:6px;
-	left: 200px;
-	width:100px;
-}
-#legend04{
-	position: absolute;
-	top:6px;
-	left: 300px;
-	width:100px;
+
+.legendRect{
+	display:inline-block;
+	padding-bottom: 4px;
+	width: 5px;
+	height: 5px;
+	background-color: #000000;
 }
 
-#legend05{
-	position: absolute;
-	top:6px;
-	left: 400px;
-	width:100px;
-}
-
-#legendRect01{
-	position: absolute;
-	top: 10px;
-	left: -8px;
-	width: 5px;
-	height: 5px;
-	background-color: #000000;
-}
-#legendRect02{
-	position: absolute;
-	top: 10px;
-	left: 92px;
-	width: 5px;
-	height: 5px;
-	background-color: #000000;
-}
-#legendRect03{
-	position: absolute;
-	top: 10px;
-	left: 192px;
-	width: 5px;
-	height: 5px;
-	background-color: #000000;
-}
-#legendRect04{
-	position: absolute;
-	top: 10px;
-	left: 292px;
-	width: 5px;
-	height: 5px;
-	background-color: #000000;
-}
-#legendRect05{
-	position: absolute;
-	top: 10px;
-	left: 392px;
-	width: 5px;
-	height: 5px;
-	background-color: #000000;
-}
 #legendGradient{
-	position:absolute;
-	top:10px;
-	left:27px;
+	display:inline-block;
+	margin-left:15px;
 	width: 170px;
 	height:5px;
 	background-color:#ffffff;
