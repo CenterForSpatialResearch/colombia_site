@@ -1389,24 +1389,24 @@
 	function updateUiColorGender() {
 		//Update legend text
 		d3.select("#legend01Text")
-		.text("");
-		d3.select("#legend02Text")
 		.text("Male");
-		d3.select("#legend03Text")
+		d3.select("#legend02Text")
 		.text("Female");
-		d3.select("#legend04Text")
+		d3.select("#legend03Text")
 		.text("Other or N/A");
+		d3.select("#legend04Text")
+		.text("");
 		d3.select("#legend05Text")
 		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
-		.style("background-color", "#000000");
-		d3.select("#legendRect02")
 		.style("background-color", "#40FF9F");
-		d3.select("#legendRect03")
+		d3.select("#legendRect02")
 		.style("background-color", "#FFBC40");
-		d3.select("#legendRect04")
+		d3.select("#legendRect03")
 		.style("background-color", "#BC40FF");
+		d3.select("#legendRect04")
+		.style("background-color", "#000000");
 		d3.select("#legendRect05")
 		.style("background-color", "#000000");
 		d3.select("#legendGradient")
