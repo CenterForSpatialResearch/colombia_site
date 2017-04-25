@@ -12,7 +12,7 @@ body {
 }
 
 /****** Jumbotron ********/
-.container-narrow .jumbotron {
+.container .jumbotron {
 	padding-right: 0px;
 	padding-left: 0px;
 	background-color: #191919;

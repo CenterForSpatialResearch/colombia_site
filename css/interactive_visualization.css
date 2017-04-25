@@ -228,63 +228,74 @@ li p{
 	font-weight: 100;
 }
 
+.selectTitle p {
+	position: absolute;
+	top: 60px;
+	left: 1235px;
+	font-family: 'Roboto', helvetica, sans-serif;
+	font-weight: 100;
+	font-size: .7em;
+}
+
 /* Style The Dropdown Button */
 .dropbtn {
     background-color: #333333;
     color: white;
-    padding: 5px;
-    /*font-size: 16px;*/
     border: none;
     cursor: pointer;
+		/*height: 15px;*/
+		width: 100px;
+		text-align: center;
+		padding: 1px 8px;
 }
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: absolute;
-    top:50px;
-    display: inline-block;
+    top:60px;
+    /*display: inline-block;*/
     z-index:1000;
-    left: 422px;
+    left: 1325px;
     font-family: 'Roboto', helvetica, sans-serif;
     font-weight: 100;
     font-size: .7em;
 }
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
     position: absolute;
     cursor: pointer;
-    background-color: #f9f9f9;
+    background-color: #000000;
     min-width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     max-height: 75vh;
-    overflow:scroll;
+    /*overflow:scroll;*/
 }
 /* Links inside the dropdown */
 .dropdown-content p {
-    color: black;
-    padding: 2px 4px;
+    color: #ffffff;
+		padding: 2px 4px;
     text-decoration: none;
     display: block;
+		margin-bottom: 0px;
 }
 /* Change color of dropdown links on hover */
-.dropdown-content p:hover {background-color: #f1f1f1}
+.dropdown-content p:hover {
+	background-color: #333333;
+}
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
-    overflow:scroll;
-}
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #7F7F7F;
+    /*overflow:scroll;*/
 }
 
 #currentMunicip {
 	position: absolute;
-    top:54px;
-    left:525px;
-    font-size:0.7em;
-    pointer-events:none;
+  top:54px;
+  left:525px;
+  font-size:0.7em;
+  pointer-events:none;
 }
 
 #loading {

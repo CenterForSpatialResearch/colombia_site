@@ -36,7 +36,7 @@
     ga('send', 'pageview');
 
   </script>
-	
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -124,6 +124,15 @@
 			<!-- <div id="legendGradient" class="hidden"></div> -->
 		</ul>
 	</div>
+	<div class="selectTitle" style="background-color: #000000; display: flex;" id="selectTitle">
+		<p id="buttonText">Select Municipality:</p>
+	</div>
+	<div class="dropdown" id='dropDownParent'>
+    <button class="dropbtn">All Municipalities</button>
+    <div class="dropdown-content" id="myddown-cont">
+    </div>
+  </div>
+  <div id="currentMunicip"></div>
 
 	<!-- Divs to sort and color data. D3 listens to these divs and updates GL once they are clicked -->
 	<div class="button sort" style="background-color: #000000; display: flex;" id="sortTitle">
@@ -176,13 +185,6 @@
 	<!-- 	<div class="button color" id="colorReportDate">
 		<p id="buttonText">Report Date</p>
 	</div> -->
-
-	<div class="dropdown" id='dropDownParent'>
-      <button class="dropbtn">Select a Municipality</button>
-      <div class="dropdown-content" id="myddown-cont">
-      </div>
-    </div>
-    <div id="currentMunicip"></div>
 
 	<div id="tooltip" class="hidden">
 		<p><span id="dateText">100</span></p>
@@ -736,7 +738,7 @@
 	// 			//we would then not do this updateAllDataCOlors line here if mouseover color button since we are just going to be changing it in a second
 
 	// 			//Update the current municipality text to be blank
-	// 			document.getElementById('currentMunicip').innerHTML = "<p></p>" 
+	// 			document.getElementById('currentMunicip').innerHTML = "<p></p>"
 	// 		}
 
 	// 		// boolHighlight = false;
@@ -914,7 +916,7 @@
 		}
 		return new THREE.Color(thisColor);
 	}
-	function shadeColor2(color, percent) {   
+	function shadeColor2(color, percent) {
 		//Code from stack overflow ... questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
 	    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
 	    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);

@@ -11,7 +11,7 @@
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles -->
   <link rel="stylesheet" type="text/css" href="../css/project-specific.css">
-  <link rel="stylesheet" type="text/css" href="../css/interactive_visualization.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../css/interactive_visualization.css"> -->
   <link rel="stylesheet" type="text/css" href="../css/map.css">
   <!-- Google fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700" rel="stylesheet">
@@ -99,6 +99,14 @@
         </div>
       </div>
       <p>Select a municipality from the dropdown or click one on the map</p>
+      <div class="dropdown" id='dropDownParent'>
+        <button class="dropbtn">Select a Municipality</button>
+        <div class="dropdown-content" id="myddown-cont">
+        </div>
+      </div>
+      <div class="button" id="showPathsAll">All Paths</div>
+      <div class="button" id="showPathsIn">Paths In</div>
+      <div class="button" id="showPathsOut">Paths Out</div>
       <div id="console">
         <div id="image"></div>
         <div id="title"></div>
@@ -114,17 +122,7 @@
         </div>
         <div id="municipText"><p></p></div>
       </div>
-      <div class="button" id="showPathsAll">All Paths</div>
-      <div class="button" id="showPathsIn">Paths In</div>
-      <div class="button" id="showPathsOut">Paths Out</div>
     </div>
-
-    <div class="dropdown" id='dropDownParent'>
-      <button class="dropbtn">Select a Municipality</button>
-      <div class="dropdown-content" id="myddown-cont">
-      </div>
-    </div>
-
   </div>
   <svg>
     <defs>
@@ -697,7 +695,7 @@
       dropDownContent.append(pTag);
     };
 
-    //Record if we are over 
+    //Record if we are over
     document.getElementById('dropDownParent').setAttribute('onmouseover', 'boolOverButton = true;');
     document.getElementById('dropDownParent').setAttribute('onmouseout', 'boolOverButton= false');
 
