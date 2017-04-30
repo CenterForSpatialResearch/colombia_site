@@ -128,11 +128,11 @@
 		<p id="buttonText">Select Municipality:</p>
 	</div>
 	<div class="dropdown" id='dropDownParent'>
-    <button class="dropbtn">All Municipalities</button>
+    <button class="dropbtn" id='currentMunicip'>All Municipalities</button>
     <div class="dropdown-content" id="myddown-cont">
     </div>
   </div>
-  <div id="currentMunicip"></div>
+  <!-- <div id="currentMunicip"></div> -->
 
 	<!-- Divs to sort and color data. D3 listens to these divs and updates GL once they are clicked -->
 	<div class="button sort" style="background-color: #000000; display: flex;" id="sortTitle">
@@ -1563,12 +1563,12 @@
 			boolHighlight = false;
 			highlightId = '';
 			//Update the current municipality text
-			document.getElementById('currentMunicip').innerHTML = "<p></p>" ;
+			document.getElementById('currentMunicip').innerHTML = "" ;
 		}else{
 			boolHighlight = true;
 			highlightId = thisId;
 			//Update the current municipality text with this name
-			document.getElementById('currentMunicip').innerHTML = "<p>"+thisName+"</p>" ;
+			document.getElementById('currentMunicip').innerHTML = thisName ;
 		}
 		//Now that we're highlihgting correctly, update the colors
 		updateAllDataColors(currentColor);

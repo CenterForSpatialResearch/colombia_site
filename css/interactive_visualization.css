@@ -290,14 +290,6 @@ li p{
     /*overflow:scroll;*/
 }
 
-#currentMunicip {
-	position: absolute;
-  top:54px;
-  left:525px;
-  font-size:0.7em;
-  pointer-events:none;
-}
-
 #loading {
 	position: absolute;
 	top: 50%;
