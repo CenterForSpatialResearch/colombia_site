@@ -494,11 +494,11 @@
     $("#population").animate({'width':''+100*thisMunicipPop/maxBarLen+"%"});
     document.getElementById("ptext").innerHTML=""+ thisMunicipPop.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Population (2005)";
     $("#desplazados").animate({'width':''+100*thisMunicipDisplaced/maxBarLen+"%"});
-    document.getElementById("dtext").innerHTML=""+ thisMunicipDisplaced.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Displaced (1985-2015)";
+    document.getElementById("dtext").innerHTML=""+ thisMunicipDisplaced.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Displaced from " + selectedMunicip[index].NAME.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) + " (1985-2015)";
     $("#refugiados").animate({'width':''+100*thisMunicipRefugees/maxBarLen+"%"});
-    document.getElementById("rtext").innerHTML=""+ thisMunicipRefugees.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Refugees (1985-2015)";
+    document.getElementById("rtext").innerHTML=""+ thisMunicipRefugees.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Displaced to " + selectedMunicip[index].NAME.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) + " (1985-2015)";
     $("#ipc").animate({'width':''+100*thisMunicipIDPS/maxBarLen+"%"});
-    document.getElementById("itext").innerHTML=""+ thisMunicipIDPS.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 IDP's (1985-2015)";
+    document.getElementById("itext").innerHTML=""+ thisMunicipIDPS.toLocaleString('en-US', {minimumFractionDigits: 0}) +" \xa0|\xa0 Displaced within " + selectedMunicip[index].NAME.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) + " (1985-2015)";
     $(mapDiv).fadeTo(1000,1)
 
     //For the municipalities that have text to display in the console, we find it here. A/o are null

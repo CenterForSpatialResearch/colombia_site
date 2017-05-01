@@ -16,7 +16,7 @@ layers:
           text:
             font:
               transform: uppercase
-              size: function() {return 30 - feature.scalerank * 2 - (20 - $zoom) }
+              size: function() {return 35 - feature.scalerank * 2 - (20 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 300
               fill: '#E5E5E5'
@@ -33,7 +33,7 @@ layers:
           text:
             font:
               transform: uppercase
-              size: function() {return 20 - feature.scalerank * 1 - (12 - $zoom) }
+              size: function() {return 30 - feature.scalerank * 1 - (12 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 100
               fill: '#E5E5E5'
@@ -47,7 +47,7 @@ layers:
           text:
             font:
               transform: uppercase
-              size: function() {return 20 - feature.scalerank * 1 - (12 - $zoom) }
+              size: function() {return 30 - feature.scalerank * 1 - (12 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 100
               fill: '#E5E5E5'
@@ -61,7 +61,7 @@ layers:
           text:
             font:
               transform: uppercase
-              size: function() {return 20 - feature.scalerank * 1 - (12 - $zoom) }
+              size: function() {return 30 - feature.scalerank * 1 - (12 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 100
               fill: '#E5E5E5'
@@ -75,7 +75,7 @@ layers:
           text:
             font:
               transform: uppercase
-              size: function() {return 20 - feature.scalerank * 1 - (12 - $zoom) }
+              size: function() {return 25 - feature.scalerank * 1 - (12 - $zoom) }
               family: Roboto, helvetica, sans-serif
               weight: 100
               fill: '#E5E5E5'
