@@ -1,7 +1,7 @@
 sources:
     osm:
         type: TopoJSON
-        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-JUsa0Gc
+        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=mapzen-HkkSbwZ
         min_zoom: 6
         max_zoom: 16
 
