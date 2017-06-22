@@ -688,7 +688,7 @@
 		raycaster = new THREE.Raycaster();
 		raycaster.params.Points.threshold = threshold;
 		// To actually render the scene we execute the following
-		renderer = new THREE.WebGLRenderer();
+		renderer = new THREE.WebGLRenderer({antialias: true});
 		renderer.setPixelRatio( window.devicePixelRatio );
 		renderer.setSize(myWidth, myHeight);
 		// renderer.setSize(1439, 799)
