@@ -1,13 +1,14 @@
 sources:
-    osm: 
-        type: TopoJSON
-        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-JUsa0Gc
+    mapzen:
+        type: MVT
+        url: ../allTiles/{z}/{x}/{y}.mvt
+        tile_size: 512
         min_zoom: 6
         max_zoom: 16
 
 layers:
     places:
-        data: { source: osm}
+        data: { source: mapzen}
         filter:
             all:
                 - kind: [city]

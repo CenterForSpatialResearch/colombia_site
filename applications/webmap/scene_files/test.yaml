@@ -1,12 +1,13 @@
 sources:
-    osm:
-        type: TopoJSON
-        url: https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson?api_key=mapzen-HkkSbwZ
+    mapzen:
+        type: MVT
+        url: ../allTiles/{z}/{x}/{y}.mvt
+        tile_size: 512
         max_zoom: 16
         rasters: [normals]
     normals:
         type: Raster
-        url: https://tile.mapzen.com/mapzen/terrain/v1/normal/{z}/{x}/{y}.png?api_key=mapzen-HkkSbwZ
+        url: https://s3.amazonaws.com/elevation-tiles-prod/normal/{z}/{x}/{y}.png
         max_zoom: 15
 
 styles:
@@ -44,14 +45,14 @@ layers:
             terrain-envmap:
                 order: 0
     earth:
-        data: {source: osm}
+        data: {source: mapzen}
         draw:
             lines:
                 order: 2
                 color: '#7F7F7F'
                 width: 1px
     boundaries:
-        data: {source: osm}
+        data: {source: mapzen}
         filter:
           kind: country
         draw:
@@ -60,7 +61,7 @@ layers:
               color: '#7F7F7F'
               width: 1px
     water:
-        data: {source: osm}
+        data: {source: mapzen}
         filter:
             $zoom: {min: 2, max: 16}
         draw:
@@ -68,7 +69,7 @@ layers:
                 order: 3
                 color: '#000000'
     roads:
-      data: {source: osm}
+      data: {source: mapzen}
       filter:
         kind: [major_road]
       draw:
