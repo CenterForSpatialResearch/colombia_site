@@ -56,7 +56,7 @@ More information on the `Tangram` / `Mapzen` libraries can be found [here](https
 Finally, `d3.js` is used to load the forced displacement lines on top of the map and to interact with the left hand panel and dropdown menus. Data for this comes from the `csv` files in the `applications/data` folder.
 
 #### Animation
-The animation page is quite simple. It only loads a video that was previously uploaded to [Viemo.com](https://vimeo.com/178423175).
+The animation page is quite simple. It only loads a video that was previously uploaded to [Vimeo.com](https://vimeo.com/178423175).
 
 #### Interactive data visualization
 The main library used in this page is `Three.js`. Documentation for this library can be found [here](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene). This library was chosen over `p5.js` or `d3.js` because it was much more efficient at handling large amounts of 'particles'. However, `d3.js` is still used to handle some of the interactivity in the page.
