@@ -114,8 +114,9 @@ p{
 }
 #municipText{
   font-size: .9em;
-  font-weight: 100;
+  font-weight: 300;
   margin-bottom: 12px;
+  color: var(--descriptionColor);
 }
 .button{
   z-index: 100;
@@ -255,12 +256,12 @@ p{
 }
 .leaflet-touch .leaflet-control-zoom-out {
   font-family: 'Roboto', helvetica, sans-serif;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 2em;
 }
 .leaflet-touch .leaflet-control-zoom-in {
   font-family: 'Roboto', helvetica, sans-serif;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 1.5em;
 }
 .leaflet-bar {
