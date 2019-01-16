@@ -36,7 +36,7 @@ layers:
               transform: uppercase
               size: [[6, 7px], [8, 13px], [10, 16px]]
               family: Roboto, helvetica, sans-serif
-              weight: 100
+              weight: 300
               fill: '#E5E5E5'
       medium-cities:
         filter:
@@ -50,7 +50,7 @@ layers:
               transform: uppercase
               size: [[6, 5px], [8, 11px], [10, 14px]]
               family: Roboto, helvetica, sans-serif
-              weight: 100
+              weight: 300
               fill: '#E5E5E5'
       small-cities:
         filter:
@@ -64,7 +64,7 @@ layers:
               transform: uppercase
               size: [[8, 9px], [10, 12px]]
               family: Roboto, helvetica, sans-serif
-              weight: 100
+              weight: 300
               fill: '#E5E5E5'
       no-pop-cities:
         filter:
@@ -78,5 +78,5 @@ layers:
               transform: uppercase
               size: [[8, 7px], [10, 10px]]
               family: Roboto, helvetica, sans-serif
-              weight: 100
+              weight: 300
               fill: '#E5E5E5'

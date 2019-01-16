@@ -4,6 +4,7 @@ body {
 	background-color: #191919;
 	color: #ffffff;
 	font-family: 'Roboto', helvetica, sans-serif;
+	--descriptionColor: #BFBFBF;
 }
 .container-narrow {
 	max-width: 800px;
@@ -26,7 +27,8 @@ body {
 }
 .jumbotron p {
 	font-size: 1.5em;
-	font-weight: 100;
+	font-weight: 300;
+	color: var(--descriptionColor);
 }
 
 /****** Thumbnails Landing Page *********/
@@ -35,29 +37,30 @@ body {
 	margin-bottom: 40px;
 }
 p.application-title {
-	font-weight: 100;
+	font-weight: 300;
 	font-size: 1.3em;
-	color: #ffffff;
+	color: var(--descriptionColor);
 	margin-bottom: 3px;
 	margin-top: 3px;
 }
 p.application-summary {
-	color: #ffffff;
+	color: var(--descriptionColor);
 	font-size: 1em;
-	font-weight: 100;
+	font-weight: 300;
 }
 .project-thumb:hover{
-	color: #ffffff;
+	color: var(--descriptionColor);
 	text-decoration: underline;
 }
 
 /***** Text landing page ********/
 p.intro-bottom {
-	font-weight: 100;
+	font-weight: 300;
 	font-size: 1.15em;
+	color: var(--descriptionColor);
 }
 p.intro-bottom > a {
-	color: #ffffff;
+	color: var(--descriptionColor);
 	text-decoration: underline;
 }
 

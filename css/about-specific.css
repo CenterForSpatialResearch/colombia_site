@@ -4,6 +4,7 @@ body {
 	background-color: #191919;
 	color: #ffffff;
 	font-family: 'Roboto', helvetica, sans-serif;
+	--descriptionColor: #BFBFBF;
 }
 .container-narrow {
 	max-width: 800px;
@@ -22,8 +23,8 @@ body {
 	font-size: 1.4em;
 }
 .navbar-default .navbar-nav > li > a {
-	color: #ffffff;
-	font-weight: 100;
+	color: var(--descriptionColor);
+	font-weight: 300;
 	font-size: .95em;
 }
 .nav > li > a {
@@ -59,11 +60,12 @@ body {
 	line-height: 120%;
 }
 .section p {
-	font-weight: 100;
+	font-weight: 300;
 	font-size: 1.35em;
+	color: var(--descriptionColor);
 }
 .section p > a {
-	color: #ffffff;
+	color: var(--descriptionColor);
 	text-decoration: underline;
 }
 h2 {
@@ -79,9 +81,9 @@ h2 {
 	margin-bottom: 10px;
 }
 p.image-caption {
-	color: #ffffff;
+	color: var(--descriptionColor);
 	font-size: 1em;
-	font-weight: 100;
+	font-weight: 300;
 	margin-top: 10px;
 	margin-bottom: 20px;
 }
