@@ -1,0 +1,82 @@
+sources:
+    osm:
+        type: MVT
+        url: ../allTiles/{z}/{x}/{y}.mvt
+        tile_size: 512
+        min_zoom: 6
+        max_zoom: 16
+
+layers:
+    places:
+      data: {source: osm}
+      countries:
+        filter:
+          kind: [country]
+          $zoom: {min: 2, max: 8}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: [[6, 10px], [8, 15px]]
+              family: Roboto, helvetica, sans-serif
+              weight: 300
+              fill: '#E5E5E5'
+              stroke:
+                color: '#000000'
+                width: 2px
+      large-cities:
+        filter:
+          all:
+            - not: {kind: [country, state, neighborhood, region, province, district]}
+            - population: { min: 500000 }
+            - $zoom: {min: 6}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: [[6, 7px], [8, 13px], [10, 16px]]
+              family: Roboto, helvetica, sans-serif
+              weight: 300
+              fill: '#E5E5E5'
+      medium-cities:
+        filter:
+          all:
+            - not: {kind: [country, state, neighborhood, region, province, district]}
+            - population: { min: 100000, max: 500000 }
+            - $zoom: {min: 8}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: [[6, 5px], [8, 11px], [10, 14px]]
+              family: Roboto, helvetica, sans-serif
+              weight: 300
+              fill: '#E5E5E5'
+      small-cities:
+        filter:
+          all:
+            - not: {kind: [country, state, neighborhood, region, province, district]}
+            - population: {max: 100000}
+            - $zoom: {min: 9}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: [[8, 9px], [10, 12px]]
+              family: Roboto, helvetica, sans-serif
+              weight: 300
+              fill: '#E5E5E5'
+      no-pop-cities:
+        filter:
+          all:
+            - not: {kind: [country, state, neighborhood, region, province, district]}
+            - population: false
+            - $zoom: {min: 10}
+        draw:
+          text:
+            font:
+              transform: uppercase
+              size: [[8, 7px], [10, 10px]]
+              family: Roboto, helvetica, sans-serif
+              weight: 300
+              fill: '#E5E5E5'
