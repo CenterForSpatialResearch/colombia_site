@@ -4,7 +4,6 @@ body {
 	background-color: #191919;
 	color: #ffffff;
 	font-family: 'Roboto', helvetica, sans-serif;
-	--descriptionColor: #BFBFBF;
 }
 .container-narrow {
 	max-width: 800px;
@@ -13,7 +12,7 @@ body {
 }
 
 /****** Jumbotron ********/
-.container .jumbotron {
+.container-narrow .jumbotron {
 	padding-right: 0px;
 	padding-left: 0px;
 	background-color: #191919;
@@ -27,8 +26,7 @@ body {
 }
 .jumbotron p {
 	font-size: 1.5em;
-	font-weight: 300;
-	color: var(--descriptionColor);
+	font-weight: 100;
 }
 
 /****** Thumbnails Landing Page *********/
@@ -37,30 +35,29 @@ body {
 	margin-bottom: 40px;
 }
 p.application-title {
-	font-weight: 300;
+	font-weight: 100;
 	font-size: 1.3em;
-	color: var(--descriptionColor);
+	color: #ffffff;
 	margin-bottom: 3px;
 	margin-top: 3px;
 }
 p.application-summary {
-	color: var(--descriptionColor);
+	color: #ffffff;
 	font-size: 1em;
-	font-weight: 300;
+	font-weight: 100;
 }
 .project-thumb:hover{
-	color: var(--descriptionColor);
+	color: #ffffff;
 	text-decoration: underline;
 }
 
 /***** Text landing page ********/
 p.intro-bottom {
-	font-weight: 300;
+	font-weight: 100;
 	font-size: 1.15em;
-	color: var(--descriptionColor);
 }
 p.intro-bottom > a {
-	color: var(--descriptionColor);
+	color: #ffffff;
 	text-decoration: underline;
 }
 
