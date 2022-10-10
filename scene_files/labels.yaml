@@ -1,0 +1,24 @@
+sources:
+    mapzen:
+        type: MVT
+        url: ../allTiles/{z}/{x}/{y}.mvt
+        tile_size: 512
+        min_zoom: 6
+        max_zoom: 16
+
+layers:
+    places:
+        data: { source: mapzen}
+        filter:
+            all:
+                - kind: [city]
+        draw:
+            text:
+                anchor: bottom
+                offset: [0,10px]
+                interactive: true
+                font:
+                    family: Arial
+                    fill: '#fff'
+                    size: 16px
+                    stroke: { color: 'fff', width: 0.5px}

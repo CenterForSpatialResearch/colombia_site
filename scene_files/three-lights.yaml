@@ -1,0 +1,73 @@
+sources:
+    osm:
+        type: TopoJSON
+        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-JUsa0Gc
+        max_zoom: 15
+
+    normals:
+        type: Raster
+        url: https://terrain-preview.mapzen.com/normal/{z}/{x}/{y}.png
+        max_zoom: 15
+
+lights:
+    directional1:
+        type: directional
+        direction: [1,-.5, -.5]
+        diffuse: '#00482f'
+    directional2:
+        type: directional
+        direction: [-1, -.4, -.5]
+        specular: [1,1,1]
+        diffuse: '#535353'
+    point1:
+        type: point
+        position: [1,1,2.4]
+        ambient: [0.07,0.07,0.07]
+        diffuse: [0.01,0.01,0.01]
+        specular: .5
+
+styles:
+    terrain-envmap:
+        base: raster
+        raster: normal
+        shaders:
+            uniforms:
+                u_scale: .05
+                u_envmap: imhof5_1.jpg
+            blocks:
+                global: |
+                    // Simplified view-independent environment map
+                    vec4 applyEnvmap (in sampler2D _tex, in vec3 _normal) {
+                        const vec3 eye = vec3(0.,0.,-1.);
+                        vec3 r = reflect(eye, _normal);
+                        r.z += 20.0;
+                        float m = 2. * length(r);
+                        vec2 uv = r.xy / m + .5;
+                        return texture2D(_tex, uv);
+                    }
+                color: |
+                    normal.z *= u_scale;
+                    normal = normalize(normal);
+                    color = applyEnvmap(u_envmap, normal);
+layers:
+    terrain:
+        data: { source: normals, layer: _default }
+        draw:
+            terrain-envmap:
+                order: 0
+    earth:
+        data: { source: osm }
+        draw:
+            lines:
+                order: 1
+                color: [255, 255, 255]
+                width: 1px
+    water:
+        data: {source: osm}
+        draw:
+            polygons:
+                order: 2
+                color: '#000000'
+            lines:
+                order: 2
+                color: '#ffffff'
