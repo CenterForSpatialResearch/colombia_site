@@ -24,20 +24,12 @@ a {
     display: block;
 }*/
 
-body {
-	--descriptionColor: #BFBFBF;
-}
-
 /****** Header and Legend CSS Info *********/
 #victimTitle{
 	position: absolute;
-	top: 50px;
-	left: 10px;
-	width:100%;
+	top: 50px; width:100%;
 	padding: 5px;
 	text-align: left;
-	font-weight: 300;
-	color: var(--descriptionColor);
 }
 #titleText{
 	font-size:.9em;
@@ -45,49 +37,91 @@ body {
 }
 #buttonText{
 	text-align:center;
-	font-weight: 300;
 }
-ul {
-	list-style-type:none;
-	padding: 0px;
-}
-
-li{
-	display:inline;
-	float: left;
-}
-
-li p{
-	display:inline-block;
-	padding-top:0px;
-	padding-bottom:0px;
-	padding-left:3px;
-	padding-right:15px;
-	text-align: center;
-}
-
 #legends{
 	position: absolute;
 	top:80px;
 	left:430px;
 	padding:5px;
 	font-size: .7em;
-	font-weight: 300;
-	display: inline;
+}
+#legend01{
+	position: absolute;
+	top:6px;
+	left: 0px;
+	width:70px;
+}
+#legend02{
+	position: absolute;
+	top:6px;
+	left: 80px;
+	width:70px;
+}
+#legend03{
+	position: absolute;
+	top:6px;
+	left: 160px;
+	width:70px;
+}
+#legend04{
+	position: absolute;
+	top:6px;
+	left: 240px;
+	width:70px;
 }
 
-.legendRect{
-	display:inline-block;
-	padding-bottom: 4px;
+#legend05{
+	position: absolute;
+	top:6px;
+	left: 320px;
+	width:70px;
+}
+
+#legendRect01{
+	position: absolute;
+	top: 10px;
+	left: -8px;
 	width: 5px;
 	height: 5px;
 	background-color: #000000;
 }
-
+#legendRect02{
+	position: absolute;
+	top: 10px;
+	left: 72px;
+	width: 5px;
+	height: 5px;
+	background-color: #000000;
+}
+#legendRect03{
+	position: absolute;
+	top: 10px;
+	left: 152px;
+	width: 5px;
+	height: 5px;
+	background-color: #000000;
+}
+#legendRect04{
+	position: absolute;
+	top: 10px;
+	left: 232px;
+	width: 5px;
+	height: 5px;
+	background-color: #000000;
+}
+#legendRect05{
+	position: absolute;
+	top: 10px;
+	left: 312px;
+	width: 5px;
+	height: 5px;
+	background-color: #000000;
+}
 #legendGradient{
-	display:inline-block;
-	margin-left:15px;
-	width: 170px;
+	position:absolute;
+	top:10px;
+	left:27px;
+	width: 128px;
 	height:5px;
 	background-color:#ffffff;
 	background: -webkit-linear-gradient(left, rgb(100,0,100) , rgb(100,255,100)); /* For Safari 5.1 to 6.0 */
@@ -104,7 +138,7 @@ li p{
 /******* Buttons that sort the data *********/
 
 .button{
-	background-color: #333333;
+	background-color: #2f4f4f;
 	position: absolute;
 	width: 60px;
 	height: 15px;
@@ -115,7 +149,6 @@ li p{
 	/*display: -webkit-flex;*/
 	/*display: flex;*/
 	/*align-items: center;*/
-	cursor:pointer;
 }
 .color{
 	left: 1px;
@@ -123,28 +156,28 @@ li p{
 #colorTitle{
 	/*width:450px;*/
 	/*top:85px;*/
-	left: 15px;
+	left: 5px;
 }
 #colorKey{
 	left: 183px;
 }
 #colorHecho{
-	left: 80px;
+	left: 70px;
 }
 #colorActor{
-	left: 145px;
+	left: 135px;
 }
 #colorGender{
-	left: 210px;
+	left: 200px;
 }
 #colorRace{
-	left: 275px;
+	left: 265px;
 }
 #colorEventDate{
-	left: 340px;
+	left: 330px;
 }
 #colorReportDate{
-	left: 405px;
+	left: 395px;
 }
 
 /*Buttons to color the data */
@@ -201,7 +234,6 @@ li p{
 #timelineText {
 	font-size:0.7em;
 	text-align: center;
-	font-weight: 300;
 	/*-moz-transform: rotate(60.0deg);  /* FF3.5+ */*/
 	/*-o-transform: rotate(60.0deg);  /* Opera 10.5 */*/
 	/*-webkit-transform: rotate(60.0deg);  /* Saf3.1+, Chrome */*/
@@ -228,71 +260,9 @@ li p{
 /*Tooltip paragraph styling*/
 #tooltip p {
 	margin: 0;
+	font-family: sans-serif;
 	font-size: 12px;
 	line-height: 18px;
-	font-weight: 300;
-}
-
-.selectTitle p {
-	position: absolute;
-	top: 60px;
-	left: 1235px;
-	font-family: 'Roboto', helvetica, sans-serif;
-	font-weight: 300;
-	font-size: .7em;
-}
-
-/* Style The Dropdown Button */
-.dropbtn {
-    background-color: #333333;
-    color: white;
-    border: none;
-    cursor: pointer;
-		/*height: 15px;*/
-		width: 100px;
-		text-align: center;
-		padding: 1px 6px;
-}
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: absolute;
-    top:60px;
-    /*display: inline-block;*/
-    z-index:1000;
-    left: 1325px;
-    font-family: 'Roboto', helvetica, sans-serif;
-    font-weight: 300;
-    font-size: .7em;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    cursor: pointer;
-    background-color: #000000;
-    min-width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    max-height: 75vh;
-    /*overflow:scroll;*/
-}
-/* Links inside the dropdown */
-.dropdown-content p {
-    color: #ffffff;
-		padding: 2px 4px;
-    text-decoration: none;
-    display: block;
-		margin-bottom: 0px;
-}
-/* Change color of dropdown links on hover */
-.dropdown-content p:hover {
-	background-color: #333333;
-}
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-    /*overflow:scroll;*/
 }
 
 #loading {
