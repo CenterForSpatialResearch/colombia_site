@@ -31,6 +31,15 @@ body {
 	color: var(--descriptionColor);
 }
 
+.jumbotron p > a {
+	color: #ffffff;
+}
+
+.jumbotron p > a:hover{
+	color: #ff7111;
+	text-decoration: underline;
+}
+
 /****** Thumbnails Landing Page *********/
 .tumbnails {
 	margin-top: 20px;
