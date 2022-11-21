@@ -25,6 +25,18 @@
 	<!-- Google fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700" rel="stylesheet">
 
+	<!-- Google Analytics Code -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-27897156-6', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -51,8 +63,9 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="map.html">MAP</a></li>
           <li><a href="animation.html">ANIMATION</a></li>
+		  <li><a href="truthCommission.html">TRUTH COMMISSION</a></li>
           <li class="active"><a href="interactiveViz.html">INTERACTIVE VISUALIZATION</a></li>
-					<li><a href="about.html">ABOUT</a></li>
+			<li><a href="about.html">ABOUT</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -60,9 +73,9 @@
 
 	<!-- Title Text and Header -->
 	<div id="victimTitle">
-		<p><span id="titleText">Victims </span> <span style="font-size: .75em;"> A random sample of 200,000 victims of the conflict</span></p>
+		<p>A random sample of 200,000 victims of the conflict</p>
 	</div>
-	<div id="legends">
+	<!-- <div id="legends">
 		<div id="legend01">
 			<p><span id="legend01Text"></span></p>
 		</div>
@@ -83,19 +96,50 @@
 			<p><span id="legend05Text"></span></p>
 		</div>
 		<div id="legendRect05"></div>
-
-
 		<div id="legendGradient" class="hidden"></div>
+	</div> -->
 
+	<div id="legends">
+		<ul>
+			<li id="legend01">
+				<div class="legendRect" id="legendRect01"></div>
+				<p><span id="legend01Text"></span></p>
+			</li>
+			<li id="legend02">
+				<div id="legendGradient" class="hidden"></div>
+				<div class="legendRect" id="legendRect02"></div>
+				<p><span id="legend02Text"></span></p>
+			</li>
+			<li id="legend03">
+				<div class="legendRect" id="legendRect03"></div>
+				<p><span id="legend03Text"></span></p>
+			</li>
+			<li id="legend04">
+				<div class="legendRect" id="legendRect04"></div>
+				<p><span id="legend04Text"></span></p>
+			</li>
+			<li id="legend05">
+				<div class="legendRect" id="legendRect05"></div>
+				<p><span id="legend05Text"></span></p>
+			</li>
+			<!-- <div id="legendGradient" class="hidden"></div> -->
+		</ul>
 	</div>
-
-
+	<div class="selectTitle" style="background-color: #000000; display: flex;" id="selectTitle">
+		<p id="buttonText">Select Municipality:</p>
+	</div>
+	<div class="dropdown" id='dropDownParent'>
+    <button class="dropbtn" id='currentMunicip'>All Municipalities</button>
+    <div class="dropdown-content" id="myddown-cont">
+    </div>
+  </div>
+  <!-- <div id="currentMunicip"></div> -->
 
 	<!-- Divs to sort and color data. D3 listens to these divs and updates GL once they are clicked -->
 	<div class="button sort" style="background-color: #000000; display: flex;" id="sortTitle">
-		<p id="buttonText">Order by</p>
+		<p id="buttonText">Order by:</p>
 	</div>
-<!-- 	<div class="button sort" id="sortKey">
+	<!-- 	<div class="button sort" id="sortKey">
 		<p id="buttonText">Key</p>
 	</div> -->
 	<div class="button sort" id="sortHecho">
@@ -119,9 +163,9 @@
 
 	<!-- Divs to color -->
 	<div class="button color" style="background-color: #000000; display: flex;" id="colorTitle">
-		<p id="buttonText">Symbolize by</p>
+		<p id="buttonText">Symbolize by:</p>
 	</div>
-<!-- 	<div class="button color" id="colorKey">
+	<!-- 	<div class="button color" id="colorKey">
 		<p id="buttonText">Key</p>
 	</div> -->
 	<div class="button color" id="colorHecho">
@@ -139,7 +183,7 @@
 	<div class="button color" id="colorEventDate">
 		<p id="buttonText">Event Date</p>
 	</div>
-<!-- 	<div class="button color" id="colorReportDate">
+	<!-- 	<div class="button color" id="colorReportDate">
 		<p id="buttonText">Report Date</p>
 	</div> -->
 
@@ -176,18 +220,24 @@
 	var originalWidth = myWidth;
 	var dataPadding = 284;
 	// For best viewing on my display, 1:1 ratio
-	var rectSize = 1; //1
-	var rectSpacerW = rectSpacerH = 1; //3
+	var rectSize = 1.5; //1.5 //1
+	var rectSpacerW = rectSpacerH = 0.5; //1
 	var mouse = new THREE.Vector2();
-	var threshold = rectSpacerW*2;
+	var threshold = rectSize; //rectSpacerW*2;
 	var sphere;
 	var raycastOn;
-	var buttonColorOn = "#d3d3d3";
-	var buttonColorOff = "#2f4f4f";
-	// var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_OUTPUT.csv";
-	var myFileDataPath = "data/200k_opened_correct_wcs_nocomma_srtupdt2_OUTPUT.csv";
+	var buttonColorOn = "#7F7F7F";
+	var buttonColorOff = "#333333";
+	var myFileDataPaths = ['data/200kInteractiveVizSmall.csv', 'data/TextSelectedMunicipalities.tsv'];
+	// Variables to record which munipality data points to highlight, if any
+	var boolHighlight = false;
+	var highlightId;
+	var floatHighlightPerc = -0.75;
+	var boolMouseOnDropDown = false;
+	var currentColor;
 	//Victims dataset
 	var datasetVictims = [];
+	var selectedMunicipalities;
 	//Timeline dataset
 	var eventTimeline = [ [0, '1985'], [477, '1986'], [1076, '1987'], [1778, '1988'], [2916, '1989'], [4031, '1990'], [5451, '1991'], [6867, '1992'], [8534, '1993'], [10351, '1994'], [12259, '1995'], [15327, '1996'], [19128, '1997'], [25613, '1998'], [31744, '1999'], [38960, '2000'], [53078, '2001'], [69698, '2002'], [89011, '2003'], [101207, '2004'], [112106, '2005'], [123391, '2006'], [134525, '2007'], [146208, '2008'], [156291, '2009'], [162501, '2010'], [167786, '2011'], [174592, '2012'], [182330, '2013'], [190085, '2014'], [197012, '2015'] ];
 	var reportTimeline = [ [0, ''], [11, '1990'], [18, '1993'], [19, '1994'], [20, '1996'], [79, '1997'], [423, '1998'], [1713, '1999'], [2834, '2000'], [10129, '2001'], [20233, '2002'], [32689, '2003'], [39577, '2004'], [46517, '2005'], [54223, '2006'], [62978, '2007'], [73698, '2008'], [91335, '2009'], [105601, '2010'], [115881, '2011'], [126337, '2012'], [144304, '2013'], [166458, '2014'], [188663, '2015'], [199998, '2016'] ];
@@ -274,20 +324,20 @@
 	//Hide the timeline tick marks
 	d3.selectAll(".timelineTick").classed("hidden", true);
 	//Run our script, this function and d3 prevent viz from running before data is fully loaded
-	parseMyFile(myFileDataPath);
+	parseMyFile(myFileDataPaths);
 
 	// #############################################################################
 	// ###### Parses data and establishes queue to load data before viz is run #####
 	// #############################################################################
 
-	function parseMyFile(myFileName) {
+	function parseMyFile(myFileNames) {
 		var q = d3.queue();
 		q.defer(function(callback) {
-			d3.csv(myFileName, function(res) {
+			d3.csv(myFileNames[0], function(res) {
 				//By default, csv loads all data as strings, here we parse the data into other data types
 				res.forEach(function(d,i) {
 					d.key = i;							//we also add a temporary key value
-					d.cod_persona = +d.cod_persona;
+					// d.cod_persona = +d.cod_persona;
 					d.param_hecho = +d.param_hecho;
 					d.uniqueRank_param_hecho = +d.uniqueRank_param_hecho;
 					d.uniqueRank_pert_etnica = +d.uniqueRank_pert_etnica;
@@ -300,7 +350,7 @@
 						d.pert_etnica = "Afrocolombian";
 					}
 					else if (d.pert_etnica == "Gitano(a) ROM") {
-						d.pert_etnica = "ROM";
+						d.pert_etnica = "Other";
 					}
 					else if (d.pert_etnica == "Indigena") {
 						d.pert_etnica = "Indigenous";
@@ -320,8 +370,13 @@
 				callback(null, res);
 			});
 		});
+		q.defer(function(callback) {
+	      d3.tsv(myFileNames[1], function(res2) {
+	        callback(null, res2);
+	      });
+	    });
 		//Once data has loaded, execute rest of code
-		q.await(restOfCode);
+		q.awaitAll(restOfCode);
 	};
 
 	// #############################################################################
@@ -330,8 +385,43 @@
 
 	function restOfCode(err, results) {
 		// Set dataset to the data d3 just loaded in the queue
-		datasetVictims = results;
+		datasetVictims = results[0];
+		selectedMunicipalities = results[1];
 		var dataSetLen = datasetVictims.length;
+
+		//Add our drop down content to the menu
+	    var dropDownContent = document.getElementById('myddown-cont');
+
+		//Add the "All Municpality" to our dropdown before we add all the municipalities
+		var pTag = document.createElement('p');
+	    pTag.setAttribute('myid', 'none');
+	    pTag.setAttribute('myname', 'all');
+      	pTag.setAttribute('onclick', 'dropDownClick(this.getAttribute("myId"), "all")');
+	  	pTag.innerHTML = 'All Municipalities';
+      	dropDownContent.append(pTag);
+
+      	//sort the selected municipalities for the dropdown menu
+		selectedMunicipalities.sort(function(a,b){return(a.Municipality < b.Municipality ?  -1 : (a.Municipality > b.Municipality ? 1 : 0)); });
+
+	    //add those municiplaities to our dropdown list
+	    for (j=0; j< selectedMunicipalities.length; j++)
+	    {
+	      //add the municipalities to the dropdown
+	      pTag = document.createElement('p');
+	      pTag.setAttribute('myid', selectedMunicipalities[j].ID);
+	      pTag.setAttribute('myname', selectedMunicipalities[j].Municipality);
+	      pTag.setAttribute('onclick', 'dropDownClick(this.getAttribute("myId"), this.getAttribute("myname"))');
+	      pTag.innerHTML = selectedMunicipalities[j].Municipality;
+	      dropDownContent.append(pTag);
+	    };
+
+	    //Record if we are over the dropdown menu
+	    //MIKE - not working correctly right now. We should also be hiding the tooltip when we're onmouseover, should add this to current onmouseover attribute
+	    // if it was wokring
+	    // document.getElementById('dropDownParent').setAttribute('onmouseover', 'd3.select("#tooltip").classed("hidden", true);');
+	    // document.getElementById('dropDownParent').setAttribute('onmouseout', 'd3.select("#tooltip").classed("hidden", false);');
+	    document.getElementById('dropDownParent').setAttribute('onmouseover', 'boolMouseOnDropDown = true;');
+	    document.getElementById('dropDownParent').setAttribute('onmouseout', 'boolMouseOnDropDown = false;;');
 
 		//Hide loading text
 		d3.select("#loading").classed("hidden", true);
@@ -460,6 +550,7 @@
 		// ### Color Events ###
 		d3.select("#colorKey").on("click", function() {
 			//Update colors of the particles
+			currentColor = 'key';
 			for (i = 0; i < dataSetLen; i ++){
 				var thisDataPt = datasetVictims[i];
 				geometry.colors[i] = colorKey(thisDataPt);
@@ -468,6 +559,7 @@
 		});
 		d3.select("#colorHecho").on("click", function() {
 			//Update colors of the particles
+			currentColor = 'hecho';
 			for (i = 0; i < dataSetLen; i ++){
 				var thisDataPt = datasetVictims[i];
 				geometry.colors[i] = colorHecho(thisDataPt);
@@ -476,6 +568,7 @@
 		});
 		d3.select("#colorActor").on("click", function() {
 			//Update colors of the particles
+			currentColor='actor';
 			for (i = 0; i < dataSetLen; i ++){
 
 				var thisDataPt = datasetVictims[i];
@@ -485,6 +578,7 @@
 		});
 		d3.select("#colorGender").on("click", function() {
 			//Update colors of the particles
+			currentColor = 'gender';
 			for (i = 0; i < dataSetLen; i ++){
 				var thisDataPt = datasetVictims[i];
 				geometry.colors[i] = colorGender(thisDataPt);
@@ -493,6 +587,7 @@
 		});
 		d3.select("#colorRace").on("click", function() {
 			//Update colors of the particles
+			currentColor = 'race';
 			for (i = 0; i < dataSetLen; i ++){
 				var thisDataPt = datasetVictims[i];
 				geometry.colors[i] = colorRace(thisDataPt);
@@ -502,22 +597,22 @@
 		//Optional color by event date for date color
 		d3.select("#colorEventDate").on("click", function() {
 			// Update colors of the particles
+			currentColor = 'eventDate';
 			for (i = 0; i < dataSetLen; i ++){
 				var thisDataPt = datasetVictims[i];
 				geometry.colors[i] = colorEventDate(thisDataPt);
 			}
-			// UPDATE UI HERE
 			updateUiColorEventDate();
 
 		});
 		//Optional color by report date for date color
 		d3.select("#colorReportDate").on("click", function() {
 			// Update colors of the particles
+			currentColor = 'reportDate';
 			for (i = 0; i < dataSetLen; i ++){
 				var thisDataPt = datasetVictims[i];
 				geometry.colors[i] = colorReportDate(thisDataPt);
 			}
-			// UPDATE UI HERE
 			updateUiColorReportDate();
 		});
 	}
@@ -566,12 +661,18 @@
 			vertex.direction = vertex.startPosition.clone().sub(vertex.endPosition);
 			vertex.copy(vertex.startPosition);
 			geometry.vertices.push( vertex );
-			colors[i] = colorActor(thisDataPt);
+			colors[i] = colorHecho(thisDataPt);
 		}
+		//Set our current color
+		currentColor = 'hecho';
 		// Assign our desired color to each piece of geometry
 		geometry.colors = colors;
 		// For each datapoint we asign a point material with a rectangle (pixel) size and our desired color
-		material = new THREE.PointsMaterial({size: rectSize, sizeAttenuation: false, vertexColors: THREE.VertexColors});
+		material = new THREE.PointsMaterial({
+			size: rectSize,
+			sizeAttenuation: false,
+			vertexColors: THREE.VertexColors,
+		});
 		// We now bind the geometry to the material to create a point that can be visualized, and then add those points to the scene
 		particles = new THREE.Points(geometry, material);
 		scene.add(particles);
@@ -588,7 +689,7 @@
 		raycaster = new THREE.Raycaster();
 		raycaster.params.Points.threshold = threshold;
 		// To actually render the scene we execute the following
-		renderer = new THREE.WebGLRenderer();
+		renderer = new THREE.WebGLRenderer({antialias: true});
 		renderer.setPixelRatio( window.devicePixelRatio );
 		renderer.setSize(myWidth, myHeight);
 		// renderer.setSize(1439, 799)
@@ -597,9 +698,10 @@
 		// Event listeners that listen for when the mouse is moved or when the window is resized
 		window.addEventListener( 'resize', onWindowResize, false);
 		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		// document.addEventListener( 'mousedown', onDocumentMouseDown);
 		// For user friendliness, we identify how we are sorting and coloring to begin by showing the appropriate legend and color
 		updateUiSortEventDate();
-		updateUiColorActor();
+		updateUiColorHecho();
 	}
 
 	// #############################################################################
@@ -608,15 +710,10 @@
 
 	function onWindowResize( event ) {
 		//Variables to update whenever the browser window is resized
-		console.log("Window resized");
 		windowHalfX = window.innerWidth / 2;
 		windowHalfY = window.innerHeight / 2;
 		camera.aspect = window.innerWidth / window.innerHeight;
 		aspectRatio = window.innerWidth / window.innerHeight;
-	// 	camera.left   = - camViewSize * aspectRatio / 2;
-	// 	camera.right  =   camViewSize * aspectRatio / 2;
-	// 	camera.top    =   camViewSize / 2 + vertPadding;
-	// 	camera.bottom = - camViewSize / 2 + vertPadding;
 		camera.updateProjectionMatrix();
 		// myHeight = viewSize;
 		myWidth = viewSize*aspectRatio;
@@ -628,6 +725,27 @@
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 	}
+	// function onDocumentMouseDown( event) {
+	// 	//If mousedown while the mouse is not on the dropdown menu, reset our highlightbool and id
+	// 	if (!boolMouseOnDropDown){
+	// 		//if the mouse is not on the dropdown menu...
+	// 		if(boolHighlight){
+	// 			// if there are values that are currently being hight
+	// 			boolHighlight = false;
+	// 			highlightId = '';
+	// 			//update the colors now that boolHighlight is false to return to base colors
+	// 			updateAllDataColors(currentColor);
+	// 			//MIKE the reset here is what is causing our color flash, maybe it's ok. We could get a mouseover flag to tell when mouse is over color buttons,
+	// 			//we would then not do this updateAllDataCOlors line here if mouseover color button since we are just going to be changing it in a second
+
+	// 			//Update the current municipality text to be blank
+	// 			document.getElementById('currentMunicip').innerHTML = "<p></p>"
+	// 		}
+
+	// 		// boolHighlight = false;
+	// 		// highlightId = '';
+	// 	}
+	// }
 
 	// #############################################################################
 	// ############################ COLOR FUNCTIONS ###############################
@@ -636,14 +754,35 @@
 	// Rules to color each parameter given a datapoint
 	function colorKey (_thisDataPt) {
 		var gradientLength = 255;
-		return new THREE.Color("rgb(100, " + _thisDataPt.key%gradientLength + ", 100)");
+		var thisColor = _thisDataPt.key%gradientLength;
+		thisColor = "rgb(100, " + thisColor +", 100)";
+		if(boolHighlight){
+			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
+				thisColor = shadeRGBColor(thisColor, floatHighlightPerc);
+			}
+		}
+		return new THREE.Color(thisColor);
 	}
 	function colorHecho (_thisDataPt) {
 		//HEX COLORS Processing consistent
-		var _color1 = new THREE.Color("#e65c00");
-		var _color2 = new THREE.Color("#00e6bc");
-		var _color3 = new THREE.Color("#3781d1");
-		var _color4 = new THREE.Color("#595959");
+		var _color1 = "#FF6600";
+		var _color2 = "#00FFD0";
+		var _color3 = "#459FFF";
+		var _color4 = "#595959";
+		//If we are highlighting data points, and if this data point is associated with the chosen municipality, highlight it
+		if(boolHighlight){
+			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
+				_color1 = shadeColor2(_color1, floatHighlightPerc);
+				_color2 = shadeColor2(_color2, floatHighlightPerc);
+				_color3 = shadeColor2(_color3, floatHighlightPerc);
+				_color4 = shadeColor2(_color4, floatHighlightPerc);
+			}
+		}
+		_color1 = new THREE.Color(_color1);
+		_color2 = new THREE.Color(_color2);
+		_color3 = new THREE.Color(_color3);
+		_color4 = new THREE.Color(_color4);
+
 		if(_thisDataPt.param_hecho == 5) {
 			return _color1;
 		}
@@ -659,11 +798,27 @@
 	}
 	function colorActor (_thisDataPt) {
 		//Hex Colors Processing Consistent
-		var _color1 = new THREE.Color('#e128aa');
-		var _color2 = new THREE.Color('#aae128');
-		var _color3 = new THREE.Color('#28aae1');
-		var _color4 = new THREE.Color('#ff8c00');
-		var _color5 = new THREE.Color('#595959');
+		var _color1 ="#FF2EC0";
+		var _color2 ="#C0FF2E";
+		var _color3 ="#2EC0FF";
+		var _color4 ="#FF9E2E";
+		var _color5 ="#595959";
+		//If we are highlighting data points, and if this data point is associated with the chosen municipality, highlight it
+		if(boolHighlight){
+			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
+				_color1 = shadeColor2(_color1, floatHighlightPerc);
+				_color2 = shadeColor2(_color2, floatHighlightPerc);
+				_color3 = shadeColor2(_color3, floatHighlightPerc);
+				_color4 = shadeColor2(_color4, floatHighlightPerc);
+				_color5 = shadeColor2(_color5, floatHighlightPerc);
+			}
+		}
+		_color1 = new THREE.Color(_color1);
+		_color2 = new THREE.Color(_color2);
+		_color3 = new THREE.Color(_color3);
+		_color4 = new THREE.Color(_color4);
+		_color5 = new THREE.Color(_color5);
+
 		if (_thisDataPt.autor_guerrillas == 1) {
 			return _color1;
 		}
@@ -682,9 +837,21 @@
 	}
 	function colorGender (_thisDataPt) {
 		//Hex Colors Processing Consistent
-		var _color1 = new THREE.Color('#421800');
-		var _color2 = new THREE.Color('#013f34');
-		var _color4 = new THREE.Color('#11253e');
+		var _color1 ='#40FF9F';
+		var _color2 ='#FFBC40';
+		var _color4 ='#BC40FF';
+		//If we are highlighting data points, and if this data point is associated with the chosen municipality, highlight it
+		if(boolHighlight){
+			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
+				_color1 = shadeColor2(_color1, floatHighlightPerc);
+				_color2 = shadeColor2(_color2, floatHighlightPerc);
+				_color4 = shadeColor2(_color4, floatHighlightPerc);
+			}
+		}
+		_color1 = new THREE.Color(_color1);
+		_color2 = new THREE.Color(_color2);
+		_color4 = new THREE.Color(_color4);
+
 		if(_thisDataPt.genero_hom == "Hombre") {
 			return _color1;
 		}
@@ -697,10 +864,24 @@
 	}
 	function colorRace (_thisDataPt) {
 		//Hex Colors Processing Consistent
-		var _color1 = new THREE.Color("#2db370");
-		var _color2 = new THREE.Color("#b3842d");
-		var _color3 = new THREE.Color("#842db3");
-		var _color4 = new THREE.Color("#595959");
+		var _color1 = "#40FF9F";
+		var _color2 = "#FFBC40";
+		var _color3 = "#BC40FF";
+		var _color4 = "#595959";
+		//If we are highlighting data points, and if this data point is associated with the chosen municipality, highlight it
+		if(boolHighlight){
+			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
+				_color1 = shadeColor2(_color1, floatHighlightPerc);
+				_color2 = shadeColor2(_color2, floatHighlightPerc);
+				_color3 = shadeColor2(_color3, floatHighlightPerc);
+				_color4 = shadeColor2(_color4, floatHighlightPerc);
+			}
+		}
+		_color1 = new THREE.Color(_color1);
+		_color2 = new THREE.Color(_color2);
+		_color3 = new THREE.Color(_color3);
+		_color4 = new THREE.Color(_color4);
+
 		if(_thisDataPt.pert_etnica == "None") {
 			return _color1;
 		}
@@ -717,25 +898,56 @@
 	function colorEventDate (_thisDataPt) {
 		var gradientLength = datasetVictims.length;;
 		var thisColor = parseInt(map_range(_thisDataPt.uniqueRank_event_date, 0, datasetVictims.length, 0, 255));
-		return new THREE.Color("rgb(100, " + thisColor + ", 100)");
+		thisColor = "rgb(100, " + thisColor +", 100)";
+		if(boolHighlight){
+			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
+				thisColor = shadeRGBColor(thisColor, floatHighlightPerc);
+			}
+		}
+		return new THREE.Color(thisColor);
 	}
 	function colorReportDate (_thisDataPt) {
 		var gradientLength = datasetVictims.length;;
 		var thisColor = parseInt(map_range(_thisDataPt.uniqueRank_report_date, 0, datasetVictims.length, 0, 255));
-		return new THREE.Color("rgb(" + thisColor + ", 100, 100)");
+		thisColor = "rgb(100, " + thisColor +", 100)";
+		if(boolHighlight){
+			if ( parseInt(_thisDataPt.dane_ocurrencia) != parseInt(highlightId) ){
+				thisColor = shadeRGBColor(thisColor, floatHighlightPerc);
+			}
+		}
+		return new THREE.Color(thisColor);
+	}
+	function shadeColor2(color, percent) {
+		//Code from stack overflow ... questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
+	    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+	    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+	}
+	function shadeRGBColor(color, percent) {
+		//Code from stack overflow ... questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
+	    var f=color.split(","),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=parseInt(f[0].slice(4)),G=parseInt(f[1]),B=parseInt(f[2]);
+	    return "rgb("+(Math.round((t-R)*p)+R)+","+(Math.round((t-G)*p)+G)+","+(Math.round((t-B)*p)+B)+")";
 	}
 	function getTooltipText (_thisDataPt) {
 		//Parse Text For ToolTip Mousover
-		var textList = ["Date: ", "Event: ", "Actor: ", "Gender: ", "Ethnicity: "];
-		textList[0] = textList[0] + _thisDataPt.f_ocurrencia_hecho.slice(0, -5);
+		var textList = ["Event Date: ", "Type of Event: ", "Actor: ", "Gender: ", "Ethnicity: "];
+		var monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var dateArray = _thisDataPt.f_ocurrencia_hecho.slice(0, -5).split("/");
+		if (dateArray[2] > 20){
+			var thisYear = '19' + dateArray[2];
+		}
+		else {
+			var thisYear = '20' + dateArray[2];
+		}
+		// textList[0] = textList[0] + _thisDataPt.f_ocurrencia_hecho.slice(0, -5);
+		textList[0] = textList[0] + monthList[dateArray[0]-1] + ' ' + dateArray[1] + ', ' + thisYear;
 		//Parse event data into text
 		if(_thisDataPt.param_hecho == 5) {
 			var _eventText = "Displacement";
 		}
 		else if(_thisDataPt.param_hecho == 6) {
-			var _eventText = "Homocide / Massacre";
+			var _eventText = "Homicide";
 		}
-		else if(_thisDataPt.param_hecho == 2) {
+		else if(_thisDataPt.param_hecho == 12) {
 			var _eventText = "Threat";
 		}
 		else {
@@ -762,7 +974,14 @@
 			var _actorText = "Other or Non-Identified";
 		}
 		textList[2] = textList[2] + _actorText;
-		textList[3] = textList[3] + _thisDataPt.genero_hom;
+		// textList[3] = textList[3] + _thisDataPt.genero_hom;
+		if (_thisDataPt.genero_hom == "Hombre"){
+			textList[3] = textList[3] + "Male";
+		} else if (_thisDataPt.genero_hom == "Mujer"){
+			textList[3] = textList[3] + "Female";
+		} else {
+			textList[3] = textList[3] + "Other or N/A";
+		}
 		textList[4] = textList[4] + _thisDataPt.pert_etnica;
 		return textList;
 	}
@@ -805,7 +1024,7 @@
 		// for every frame we display
 		geometry.verticesNeedUpdate = true;
 		geometry.colorsNeedUpdate = true;
-		// Tell Three JS to redner the scene and update our stats
+		// Tell Three JS to render the scene and update our stats
 		render();
 	}
 	function render() {
@@ -813,70 +1032,71 @@
 		worldX = parseInt(map_range(mouse.x, -1, 1, 0, windowHalfX*2));
 		worldY = parseInt(map_range(mouse.y, -1, 1, windowHalfY*2, 0));
 		//Calculate raycaster intersections (mouseover events) when we are not actively moving particles on screen
-		if (raycastOn) {
-			// Tell three JS where we are drawing our ray from and based on what point
+		if(!boolMouseOnDropDown){
+			if (raycastOn) {
+				// Tell three JS where we are drawing our ray from and based on what point
 
-			// var raycastMouseX = map_range(worldX, 0, 1427, -0.9825, 0.7775000000000001);
-			var raycastMouseX = map_range(worldX, 0 ,originalWidth, -1, 1);
-			var raycastMouseY = map_range(worldY, 0, myHeight, 1, -1);
-			var raycastMouse = new THREE.Vector2(raycastMouseX, raycastMouseY);
+				// var raycastMouseX = map_range(worldX, 0, 1427, -0.9825, 0.7775000000000001);
+				var raycastMouseX = map_range(worldX, 0 ,originalWidth, -1, 1);
+				var raycastMouseY = map_range(worldY, 0, myHeight, 1, -1);
+				var raycastMouse = new THREE.Vector2(raycastMouseX, raycastMouseY);
 
-			raycaster.setFromCamera( raycastMouse, camera );
-			// Calculate what paricles if any the raycaster intersects
-			var intersections = raycaster.intersectObject(particles);
-			intersection = (intersections.length) > 0 ? intersections[0] : null;
-			if(intersection != null) {
-				// In the event that we DO intersect a particle, intersection is not null and we proceed
-				// Find intersection point so we know where to display our div
-				var intersectPosition = intersection.point;
-				var divXLoc = worldX;
-				if (divXLoc > windowHalfX) {
-					divXLoc = divXLoc - 250;
+				raycaster.setFromCamera( raycastMouse, camera );
+				// Calculate what paricles if any the raycaster intersects
+				var intersections = raycaster.intersectObject(particles);
+				intersection = (intersections.length) > 0 ? intersections[0] : null;
+				if(intersection != null) {
+					// In the event that we DO intersect a particle, intersection is not null and we proceed
+					// Find intersection point so we know where to display our div
+					var intersectPosition = intersection.point;
+					var divXLoc = worldX;
+					if (divXLoc > windowHalfX) {
+						divXLoc = divXLoc - 250;
+					} else {
+						divXLoc = divXLoc + 50;
+					}
+					var divYLoc = worldY;
+					if (divYLoc > windowHalfY) {
+						divYLoc = divYLoc - 100;
+					}
+					//Move our sphere to the intersected poisition
+					sphere.position.copy(intersectPosition);
+					sphere.visible = true;
+					sphere.scale.set(2, 2, 2);
+					//Get this data points parameters as text to display in the tool tip
+					tooltipTextList = getTooltipText(datasetVictims[intersection.index])
+					// Tell d3 where to display our tooltip
+					d3.select("#tooltip")
+					.transition()
+					.duration(100)
+					.style("left", divXLoc + "px")
+					.style("top", divYLoc + "px");
+					d3.select("#dateText")
+					.text(tooltipTextList[0]);
+					d3.select("#tooltip")
+					.select("#eventText")
+					.text(tooltipTextList[1]);
+					d3.select("#tooltip")
+					.select("#actorText")
+					.text(tooltipTextList[2]);
+					d3.select("#tooltip")
+					.select("#genderText")
+					.text(tooltipTextList[3]);
+					d3.select("#tooltip")
+					.select("#ethnicityText")
+					.text(tooltipTextList[4]);
+					//Show the tooltip
+					d3.select("#tooltip").classed("hidden", false);
 				} else {
-					divXLoc = divXLoc + 50;
+					//Hide our sphere cursor
+					sphere.visible = false;
+					//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
 				}
-				var divYLoc = worldY;
-				if (divYLoc > windowHalfY) {
-					divYLoc = divYLoc - 100;
-				}
-				//Move our sphere to the intersected poisition
-				sphere.position.copy(intersectPosition);
-				sphere.visible = true;
-				sphere.scale.set(2, 2, 2);
-				//Get this data points parameters as text to display in the tool tip
-				tooltipTextList = getTooltipText(datasetVictims[intersection.index])
-				// Tell d3 where to display our tooltip
-				d3.select("#tooltip")
-				.transition()
-				.duration(100)
-				.style("left", divXLoc + "px")
-				//eventually should scale the x,y so it is the same size as the space where the pixels are displayed
-				.style("top", divYLoc + "px");
-				d3.select("#dateText")
-				.text(tooltipTextList[0]);
-				d3.select("#tooltip")
-				.select("#eventText")
-				.text(tooltipTextList[1]);
-				d3.select("#tooltip")
-				.select("#actorText")
-				.text(tooltipTextList[2]);
-				d3.select("#tooltip")
-				.select("#genderText")
-				.text(tooltipTextList[3]);
-				d3.select("#tooltip")
-				.select("#ethnicityText")
-				.text(tooltipTextList[4]);
-				//Show the tooltip
-				d3.select("#tooltip").classed("hidden", false);
 			} else {
-				//Hide our sphere cursor
-				sphere.visible = false;
 				//Hide the tooltip
 				d3.select("#tooltip").classed("hidden", true);
 			}
-		} else {
-			//Hide the tooltip
-			d3.select("#tooltip").classed("hidden", true);
 		}
 		// Three JS render this scene with this camera
 		renderer.render( scene, camera );
@@ -1090,7 +1310,7 @@
 		d3.select("#legend01Text")
 		.text("Displacement");
 		d3.select("#legend02Text")
-		.text("Homicide / Massacre");
+		.text("Homicide");
 		d3.select("#legend03Text")
 		.text("Threat");
 		d3.select("#legend04Text")
@@ -1099,11 +1319,11 @@
 		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
-		.style("background-color", "#e65c00");
+		.style("background-color", "#FF6600");
 		d3.select("#legendRect02")
-		.style("background-color", "#00e6bc");
+		.style("background-color", "#00FFD0");
 		d3.select("#legendRect03")
-		.style("background-color", "#3781d1");
+		.style("background-color", "#459FFF");
 		d3.select("#legendRect04")
 		.style("background-color", "#595959");
 		d3.select("#legendRect05")
@@ -1141,15 +1361,15 @@
 		.text("BACRIM");
 		//Update legend rectangels
 		d3.select("#legendRect01")
-		.style("background-color", "#e128aa");
+		.style("background-color", "#FF2EC0");
 		d3.select("#legendRect02")
-		.style("background-color", "#aae128");
+		.style("background-color", "#C0FF2E");
 		d3.select("#legendRect03")
-		.style("background-color", "#28aae1");
+		.style("background-color", "#2EC0FF");
 		d3.select("#legendRect05")
 		.style("background-color", "#595959");
 		d3.select("#legendRect04")
-		.style("background-color", "#ff8c00");
+		.style("background-color", "#FF9E2E");
 		d3.select("#legendGradient")
 		.classed("hidden", true);
 		//Update a/o color buttons
@@ -1172,24 +1392,24 @@
 	function updateUiColorGender() {
 		//Update legend text
 		d3.select("#legend01Text")
-		.text("");
-		d3.select("#legend02Text")
 		.text("Male");
-		d3.select("#legend03Text")
+		d3.select("#legend02Text")
 		.text("Female");
-		d3.select("#legend04Text")
+		d3.select("#legend03Text")
 		.text("Other or N/A");
+		d3.select("#legend04Text")
+		.text("");
 		d3.select("#legend05Text")
 		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
-		.style("background-color", "#000000");
+		.style("background-color", "#40FF9F");
 		d3.select("#legendRect02")
-		.style("background-color", "#421800");
+		.style("background-color", "#FFBC40");
 		d3.select("#legendRect03")
-		.style("background-color", "#013f34");
+		.style("background-color", "#BC40FF");
 		d3.select("#legendRect04")
-		.style("background-color", "#11253e");
+		.style("background-color", "#000000");
 		d3.select("#legendRect05")
 		.style("background-color", "#000000");
 		d3.select("#legendGradient")
@@ -1215,7 +1435,7 @@
 	function updateUiColorRace() {
 		//Update legend text
 		d3.select("#legend01Text")
-		.text("N/A");
+		.text("None");
 		d3.select("#legend02Text")
 		.text("Afrocolombian");
 		d3.select("#legend03Text")
@@ -1226,11 +1446,11 @@
 		.text("");
 		//Update legend rectangels
 		d3.select("#legendRect01")
-		.style("background-color", "#2db370");
+		.style("background-color", "#40FF9F");
 		d3.select("#legendRect02")
-		.style("background-color", "#b3842d");
+		.style("background-color", "#FFBC40");
 		d3.select("#legendRect03")
-		.style("background-color", "#842db3");
+		.style("background-color", "#BC40FF");
 		d3.select("#legendRect04")
 		.style("background-color", "#595959");
 		d3.select("#legendRect05")
@@ -1338,6 +1558,63 @@
 		d3.select("#colorReportDate")
 		.style("background-color", buttonColorOn);
 	}
+	//On dropdown click, highlight the relevant datapoints
+	function dropDownClick(thisId, thisName){
+		if(thisName === "all"){
+			boolHighlight = false;
+			highlightId = '';
+			//Update the current municipality text
+			document.getElementById('currentMunicip').innerHTML = "All Municipalities" ;
+		}else{
+			boolHighlight = true;
+			highlightId = thisId;
+			//Update the current municipality text with this name
+			document.getElementById('currentMunicip').innerHTML = thisName ;
+		}
+		//Now that we're highlihgting correctly, update the colors
+		updateAllDataColors(currentColor);
+	}
+	function updateAllDataColors(_currentColorString){
+		var _dataSetLen = datasetVictims.length;
+		//Update the colors now that we've clicked
+		if(_currentColorString === 'key'){
+			for (i = 0; i < _dataSetLen; i ++){
+				var thisDataPt = datasetVictims[i];
+				geometry.colors[i] = colorKey(thisDataPt);
+			}
+		}else if(_currentColorString === 'hecho'){
+			for (i = 0; i < _dataSetLen; i ++){
+				var thisDataPt = datasetVictims[i];
+				geometry.colors[i] = colorHecho(thisDataPt);
+			}
+		}else if(_currentColorString === 'actor'){
+			for (i = 0; i < _dataSetLen; i ++){
+				var thisDataPt = datasetVictims[i];
+				geometry.colors[i] = colorActor(thisDataPt);
+			}
+		}else if(_currentColorString === 'gender'){
+			for (i = 0; i < _dataSetLen; i ++){
+				var thisDataPt = datasetVictims[i];
+				geometry.colors[i] = colorGender(thisDataPt);
+			}
+		}else if(_currentColorString === 'race'){
+			for (i = 0; i < _dataSetLen; i ++){
+				var thisDataPt = datasetVictims[i];
+				geometry.colors[i] = colorRace(thisDataPt);
+			}
+		}else if(_currentColorString === 'eventDate'){
+			for (i = 0; i < _dataSetLen; i ++){
+				var thisDataPt = datasetVictims[i];
+				geometry.colors[i] = colorEventDate(thisDataPt);
+			}
+		}else if(_currentColorString=== 'reportDate'){
+			for (i = 0; i < _dataSetLen; i ++){
+				var thisDataPt = datasetVictims[i];
+				geometry.colors[i] = colorReportDate(thisDataPt);
+			}
+		}
+	}
+
 	//Given a data index return the x and y coordinates in the array
 	function getXYCoordinates(_thisIndex, _width, _height) {
 		//Sorting from top to bottom, starting at upper left hand corner
