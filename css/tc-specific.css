@@ -49,25 +49,26 @@ body {
 }
 
 /******* Other pages *********/
-.section {
-	padding-top: 50px;
-	max-width: 100%;
-	margin: auto;
+
+.container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    max-height: 100vh;
+	width: 100%;
 }
 
 .section {
-	overflow-y: visible;
-	overflow-x: hidden;
-	scroll-snap-type: y proximity;
-	scroll-behavior: smooth;
-}
-
-.section__item {
-	scroll-snap-align: start;
+    scroll-snap-align: start;
+	/* overflow-y: scroll;  */
+    overflow-x: hidden;
 	scroll-snap-stop: always;
+    max-width: 100%;
+	padding-left: 9%;
+	padding-right: 9%;
 	padding-top: 9%;
 	padding-bottom: 25%;
-  }
+	margin: auto;
+}
 
 .section h1 {
 	font-weight: 300;
