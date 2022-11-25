@@ -59,7 +59,6 @@ body {
 
 .section {
     scroll-snap-align: start;
-	/* overflow-y: scroll;  */
     overflow-x: hidden;
 	scroll-snap-stop: always;
     max-width: 100%;
